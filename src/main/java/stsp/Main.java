@@ -39,7 +39,7 @@ public class Main {
         OptGenerator<Integer> optGenerator = new OptGenerator(array);
         
         for (int[] cities : optGenerator) {
-            String array = "";
+            String result = "";
             for (int city : cities) {
                 result += String.valueOf(city) + ", ";
             }

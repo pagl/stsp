@@ -13,4 +13,12 @@ public abstract class Utilities {
         array[i] = array[j];
         array[j] = tmp;
     }
+    
+    public static void reverse(int[] array, int from, int to) {
+        while (from < to) {
+            swap(array, from, to);
+            from++;
+            to--;
+        }    
+    }
 }

@@ -30,7 +30,8 @@ public class OptGenerator <Type> implements Iterable<int[]> {
             @Override
             public int[] next() {
                 if (this.pointA > -1) {
-                    Utilities.swap(array, this.pointA, this.pointB);
+                    // Utilities.swap(array, this.pointA, this.pointB);
+                    Utilities.reverse(array, this.pointA, this.pointB);
                 } else {
                     this.pointA++;
                 }
@@ -40,7 +41,8 @@ public class OptGenerator <Type> implements Iterable<int[]> {
                     this.pointA++;
                     this.pointB = this.pointA + 1;
                 }
-                Utilities.swap(array, this.pointA, this.pointB);
+                // Utilities.swap(array, this.pointA, this.pointB);
+                Utilities.reverse(array, this.pointA, this.pointB);
                 return array;
             }
 
