@@ -1,11 +1,12 @@
-/*
- * Mateusz Ledzianowski inf117226
- * Patryk Gliszczynski inf117288
- */
 package utils;
 
 import java.util.Iterator;
 
+/**
+ * 
+ * @author Patryk Gliszczynski
+ * @author Mateusz Ledzianowski
+ */
 
 public class OptGenerator <Type> implements Iterable<int[]> {    
     private final int[] array;

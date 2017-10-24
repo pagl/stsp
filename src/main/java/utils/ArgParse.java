@@ -1,7 +1,3 @@
-/*
- * Mateusz Ledzianowski inf117226
- * Patryk Gliszczynski inf117288
- */
 package utils;
 
 import net.sourceforge.argparse4j.ArgumentParsers;
@@ -9,8 +5,13 @@ import net.sourceforge.argparse4j.inf.ArgumentParser;
 import net.sourceforge.argparse4j.inf.ArgumentParserException;
 import net.sourceforge.argparse4j.inf.Namespace;
 
+/**
+ * 
+ * @author Patryk Gliszczynski
+ * @author Mateusz Ledzianowski
+ */
 
-public class ArgParse {
+public final class ArgParse {
         
         public Long time;
         public String dataPath;

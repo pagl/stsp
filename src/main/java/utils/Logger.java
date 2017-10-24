@@ -1,7 +1,3 @@
-/*
- * Mateusz Ledzianowski inf117226
- * Patryk Gliszczynski inf117288
- */
 package utils;
 
 import java.io.BufferedWriter;
@@ -9,6 +5,11 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+/**
+ * 
+ * @author Patryk Gliszczynski
+ * @author Mateusz Ledzianowski
+ */
 
 public class Logger {
     

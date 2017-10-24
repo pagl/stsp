@@ -1,7 +1,3 @@
-/*
- * Mateusz Ledzianowski inf117226
- * Patryk Gliszczynski inf117288
- */
 package data;
 
 import java.io.BufferedReader;
@@ -9,6 +5,11 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
+/**
+ * 
+ * @author Patryk Gliszczynski
+ * @author Mateusz Ledzianowski
+ */
 
 public class DataParser {
 

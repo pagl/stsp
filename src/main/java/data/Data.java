@@ -1,11 +1,13 @@
-/*
- * Mateusz Ledzianowski inf117226
- * Patryk Gliszczynski inf117288
- */
 package data;
 
 import java.io.IOException;
+import java.util.Arrays;
 
+/**
+ * 
+ * @author Patryk Gliszczynski
+ * @author Mateusz Ledzianowski
+ */
 
 public class Data {
     
@@ -14,16 +16,16 @@ public class Data {
     private String name, type, comment;
     private String edgeWeightType, edgeWeightFormat, displayDataTime;
     private final float[] nodeCoordX, nodeCoordY;
-    private final float[][] data;
     private final int[] currentTour;
     private final int[] optimalTour;
+    private final float[][] adjacencyMatrix;
 
     
     public Data(int size) {
         this.size = size;
         this.nodeCoordX = new float[this.size + 1];
         this.nodeCoordY = new float[this.size + 1];
-        this.data = new float[this.size + 1][this.size + 1];
+        this.adjacencyMatrix = new float[this.size + 1][this.size + 1];
         this.currentTour = new int[this.size + 1];
         this.optimalTour = new int[this.size + 1];
     }
@@ -50,7 +52,7 @@ public class Data {
                 y2 = getNodeCoordY(j);
                 x = x2 - x1;
                 y = y2 - y1;
-                this.data[i][j] = this.data[j][i] = (float)Math.sqrt(x * x + y * y);
+                this.adjacencyMatrix[i][j] = this.adjacencyMatrix[j][i] = (float) Math.sqrt(x * x + y * y);
             }
         }
     }
@@ -58,7 +60,7 @@ public class Data {
     public void printData() { 
         for(int i = 1; i <= dimension; ++i) {
             for(int j = 1; j <= dimension; ++j) {
-                System.out.print(getData(i, j) + " ");
+                System.out.print(getMatrixValue(i, j) + " ");
             }
             System.out.println();
         }
@@ -87,9 +89,9 @@ public class Data {
     public float evaluate(int[] tour) {
         float eval = 0;
         for(int i = 1; i < dimension; ++i) {
-            eval += this.data[tour[i - 1]][tour[i]];
+            eval += this.adjacencyMatrix[tour[i - 1]][tour[i]];
         }
-        eval += this.data[tour[dimension - 1]][tour[0]];
+        eval += this.adjacencyMatrix[tour[dimension - 1]][tour[0]];
         return eval;
     }
     
@@ -174,12 +176,20 @@ public class Data {
         this.setNodeCoordY(i, valueY);
     }
     
-    public float getData(int i, int j) { 
-        return data[i][j]; 
+    public float[][] getAdjacencyMatrix() { 
+        return this.adjacencyMatrix; 
     }
     
-    public void setData(int i, int j, float value) { 
-        data[i][j] = value; 
+    public float[] getNeighbors(int i) {
+        return this.adjacencyMatrix[i];
+    }
+    
+    public float getMatrixValue(int i, int j) {
+        return this.adjacencyMatrix[i][j];
+    }
+    
+    public void setMatrixValue(int i, int j, float value) { 
+        adjacencyMatrix[i][j] = value; 
     }
     
     public int[] getFullCurrentTour() { 

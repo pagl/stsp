@@ -1,14 +1,16 @@
-/*
- * Mateusz Ledzianowski inf117226
- * Patryk Gliszczynski inf117288
- */
 package stsp;
 
 import data.Data;
+import solver.HeuristicSolver;
 import solver.RandomSolver;
 import solver.Solver;
 import utils.ArgParse;
 
+/**
+ * 
+ * @author Patryk Gliszczynski
+ * @author Mateusz Ledzianowski
+ */
 
 public class Main {
     
@@ -20,6 +22,9 @@ public class Main {
         switch(arguments.solver) {
             case "random":
                 solver = new RandomSolver(data);
+                break;
+            case "heuristic":
+                solver = new HeuristicSolver(data);
                 break;
             default:
                 throw new Exception("Unknown solver name.");

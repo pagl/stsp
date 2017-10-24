@@ -1,27 +1,24 @@
-/*
- * Mateusz Ledzianowski inf117226
- * Patryk Gliszczynski inf117288
- */
 package solver;
 
 import data.Data;
 import utils.Utilities;
-
 import java.util.Random;
 
+/**
+ * This class implements an algorithm finding a random solution to the
+ * Symmetric Traveling Salesman problem.
+ * It picks a random permutation of nodes.
+ * 
+ * @author Patryk Gliszczynski
+ * @author Mateusz Ledzianowski
+ */
 
 public class RandomSolver extends Solver {
     
     private final Random rand;
-    private final int[] array;
-    
+       
     public RandomSolver(Data data) {
         super(data);
-        
-        this.array = new int[this.data.getSize()];
-        for (int i = 1; i <= this.data.getSize(); i++) {
-            this.array[i - 1] = i;
-        }
         this.rand = new Random();
     }
     

@@ -1,12 +1,13 @@
-/*
- * Mateusz Ledzianowski inf117226
- * Patryk Gliszczy�ski inf117288
- */
 package stsp;
 
 import solver.Solver;
 import utils.Logger;
 
+/**
+ * 
+ * @author Patryk Gliszczynski
+ * @author Mateusz Ledzianowski
+ */
 
 public class Experiment {
     
