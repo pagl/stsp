@@ -27,6 +27,20 @@ public class Main {
         
         Experiment experiment = new Experiment(solver, arguments.time);
         experiment.run();
+        
+        /* Example usage of OptGenerator 
+        
+        int[] array = new int[] {1, 2, 3, 4, 5, 6, 7, 8};
+        OptGenerator<Integer> optGenerator = new OptGenerator(array);
+        
+        for (int[] cities : optGenerator) {
+            String array = "";
+            for (int city : cities) {
+                result += String.valueOf(city) + ", ";
+            }
+            System.out.println(result);
+        }
+        */
     }
 }
 

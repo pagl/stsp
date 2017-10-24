@@ -5,6 +5,8 @@
 package solver;
 
 import data.Data;
+import utils.Utilities;
+
 import java.util.Random;
 
 
@@ -26,14 +28,8 @@ public class RandomSolver extends Solver {
     @Override
     protected int[] next() {
         for (int i = this.data.getSize() - 1; i > 0; --i) {
-            swap(this.array, this.rand.nextInt(i + 1), i);
+            Utilities.swap(this.array, this.rand.nextInt(i + 1), i);
         }
         return this.array;
-    }
-    
-    public static void swap(int[] array, int i, int j) {
-        int tmp = array[i];
-        array[i] = array[j];
-        array[j] = tmp;
     }
 }
