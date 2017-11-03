@@ -1,9 +1,11 @@
 package solver;
 
 import data.Data;
+import utils.Utilities;
 
 /**
  * This is an abstract class representing a Solver instance.
+ * 
  * In order to implement your own algorithms extend this class and implement
  * all necessary methods.
  * 
@@ -22,17 +24,18 @@ public abstract class Solver {
         this.data = data;
         this.array = new int[this.data.getSize()];
         
-        // Sets a base solution
+        // Generates a random initial solution
         for (int i = 1; i <= this.data.getSize(); i++) {
             this.array[i - 1] = i;
         }
+        Utilities.shuffle(this.array);
     }
     
     public float getOptimalDistance() {
         return this.data.getOptimalTourEval();
     }
 
-    public float run() {
+    public float resolve() {
         return this.data.evaluate(this.next());
     }
 }

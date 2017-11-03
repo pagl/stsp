@@ -1,7 +1,6 @@
 package solver;
 
 import data.Data;
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
@@ -9,6 +8,7 @@ import java.util.Set;
 /**
  * This class implements a simple heuristic algorithm solving the Symmetric 
  * Traveling Salesman Problem. 
+ * 
  * It picks an initial node randomly, and iteratively finds the closest 
  * not visited nodes until the solution is found.
  * 
@@ -28,7 +28,7 @@ public class HeuristicSolver extends Solver {
         this.rand = new Random();
         this.solution = new int[this.array.length];
     }   
-    
+        
     @Override
     protected int[] next() {
         this.visited.clear();

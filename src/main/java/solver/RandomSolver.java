@@ -7,6 +7,7 @@ import java.util.Random;
 /**
  * This class implements an algorithm finding a random solution to the
  * Symmetric Traveling Salesman problem.
+ * 
  * It picks a random permutation of nodes.
  * 
  * @author Patryk Gliszczynski
@@ -24,9 +25,7 @@ public class RandomSolver extends Solver {
     
     @Override
     protected int[] next() {
-        for (int i = this.data.getSize() - 1; i > 0; --i) {
-            Utilities.swap(this.array, this.rand.nextInt(i + 1), i);
-        }
+        Utilities.shuffle(this.array);
         return this.array;
     }
 }

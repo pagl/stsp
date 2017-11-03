@@ -12,12 +12,12 @@ import utils.Logger;
 public class Experiment {
     
     private final Solver solver;
-    private final long time;
+    private final long timeLimit;
     private final Logger logger;
     
-    public Experiment(Solver solver, long time) {
+    public Experiment(Solver solver, long timeLimit) {
         this.solver = solver;
-        this.time = time;
+        this.timeLimit = timeLimit;
         this.logger = new Logger(String.valueOf(solver.getClass()));
     }
     
@@ -26,16 +26,21 @@ public class Experiment {
         long currentTime, iter = 0;
         
         do {
-            logger.write(String.valueOf(this.solver.run()));
+            logger.write("#" + String.valueOf(iter++) + " " + String.valueOf(this.solver.resolve()));
             currentTime = System.currentTimeMillis();
-            iter++;
-        } while (currentTime - startTime < this.time);
+        } while (currentTime - startTime < this.timeLimit);
         
-        // Average time per iteration
-        logger.write(String.valueOf((currentTime - startTime) / (double) iter));
+        long totalTime = currentTime - startTime;
+        double averageTime = totalTime / (double) iter;
         
         // Optimal distance
-        logger.write(String.valueOf(this.solver.getOptimalDistance()));
+        logger.write("Optimal_Distance: " + String.valueOf(this.solver.getOptimalDistance()));
+        
+        // Log total run time
+        logger.write("Total_Time: " + String.valueOf(totalTime));
+        
+        // Log average time per iteration
+        logger.write("Average_Time: " + String.valueOf(averageTime));
     }
     
 }

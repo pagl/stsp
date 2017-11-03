@@ -1,9 +1,11 @@
 package stsp;
 
 import data.Data;
+import solver.GreedySolver;
 import solver.HeuristicSolver;
 import solver.RandomSolver;
 import solver.Solver;
+import solver.SteepestSolver;
 import utils.ArgParse;
 
 /**
@@ -26,26 +28,18 @@ public class Main {
             case "heuristic":
                 solver = new HeuristicSolver(data);
                 break;
+            case "greedy":  // IDEA: Should we stop solver when it can't find a better solution?
+                solver = new GreedySolver(data);
+                break;
+            case "steepest": // IDEA: Same as for greedy.
+                solver = new SteepestSolver(data);
+                break;
             default:
                 throw new Exception("Unknown solver name.");
         }
         
         Experiment experiment = new Experiment(solver, arguments.time);
         experiment.run();
-        
-        /* Example usage of OptGenerator 
-        
-        int[] array = new int[] {1, 2, 3, 4, 5, 6, 7, 8};
-        OptGenerator<Integer> optGenerator = new OptGenerator(array);
-        
-        for (int[] cities : optGenerator) {
-            String result = "";
-            for (int city : cities) {
-                result += String.valueOf(city) + ", ";
-            }
-            System.out.println(result);
-        }
-        */
     }
 }
 
