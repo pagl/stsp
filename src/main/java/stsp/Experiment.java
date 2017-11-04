@@ -23,24 +23,23 @@ public class Experiment {
     
     public void run() {
         long startTime = System.currentTimeMillis();
-        long currentTime, iter = 0;
+        long iterStartTime, currentTime, iter = 0;
         
         do {
-            logger.write("#" + String.valueOf(iter++) + " " + String.valueOf(this.solver.resolve()));
+            iterStartTime = System.currentTimeMillis();
+            Solver.Result result = this.solver.resolve();
             currentTime = System.currentTimeMillis();
+            
+            logger.write(String.valueOf(iter++) + ",");
+            logger.write(String.valueOf(result.score) + ",");
+            logger.write(String.valueOf(result.iteration) + ",");
+            logger.writeln(String.valueOf(currentTime - iterStartTime));         
         } while (currentTime - startTime < this.timeLimit);
         
-        long totalTime = currentTime - startTime;
-        double averageTime = totalTime / (double) iter;
-        
-        // Optimal distance
-        logger.write("Optimal_Distance: " + String.valueOf(this.solver.getOptimalDistance()));
-        
-        // Log total run time
-        logger.write("Total_Time: " + String.valueOf(totalTime));
-        
-        // Log average time per iteration
-        logger.write("Average_Time: " + String.valueOf(averageTime));
+        long totalTime = currentTime - startTime;  
+        logger.writeln("OPT_DIST," + String.valueOf(this.solver.getOptimalDistance()));
+        logger.writeln("TOT_TIME," + String.valueOf(totalTime));
+        logger.writeln("AVG_TIME," + String.valueOf(totalTime / (double) iter));
     }
     
 }

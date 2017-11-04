@@ -1,6 +1,7 @@
 package solver;
 
 import data.Data;
+import java.util.Arrays;
 import java.util.Random;
 import utils.OptGenerator;
 
@@ -19,21 +20,23 @@ public class SteepestSolver extends Solver {
     
     private final Random rand;
     private final OptGenerator<Integer> optGenerator;
-    private final int[] bestSolution;
+    private final int[] bestSolution, lastSolution;
 
     public SteepestSolver(Data data) {
         super(data);
         this.rand = new Random();
-        this.optGenerator = new OptGenerator(this.array);
+        this.optGenerator = new OptGenerator(this.solution);
         this.bestSolution = new int[this.data.getSize()];
+        this.lastSolution = new int[this.data.getSize()];
     }
 
     @Override
     protected int[] next() {
         float currentScore;
-        float bestScore = this.data.evaluate(this.array);
-        System.arraycopy(this.array, 0, this.bestSolution, 0, this.bestSolution.length);
-        
+        float bestScore = this.data.evaluate(this.solution);
+        System.arraycopy(this.solution, 0, this.bestSolution, 0, this.bestSolution.length);
+        System.arraycopy(this.solution, 0, this.lastSolution, 0, this.solution.length);
+
         for (int[] currentSolution : this.optGenerator) {
             currentScore = this.data.evaluate(currentSolution);
             if (currentScore < bestScore) {
@@ -41,10 +44,14 @@ public class SteepestSolver extends Solver {
                 System.arraycopy(currentSolution, 0, this.bestSolution, 0, currentSolution.length);
             }
         }
-        System.arraycopy(this.bestSolution, 0, this.array, 0, this.bestSolution.length);
-        return this.array;
+        System.arraycopy(this.bestSolution, 0, this.solution, 0, this.bestSolution.length);
+        return this.solution;
     }
     
+    @Override
+    protected boolean hasNext() {
+        return !Arrays.equals(this.lastSolution, this.solution);
+    }
 }
 
 

@@ -16,26 +16,40 @@ import utils.Utilities;
 public abstract class Solver {
 
     protected abstract int[] next();
+    protected abstract boolean hasNext();
+    
+    public class Result {
+        public int[] solution;
+        public float score;
+        public int iteration;
+    }
     
     protected final Data data;
-    protected final int[] array;
+    protected final int[] solution;
     
     public Solver(Data data) {
         this.data = data;
-        this.array = new int[this.data.getSize()];
-        
-        // Generates a random initial solution
-        for (int i = 1; i <= this.data.getSize(); i++) {
-            this.array[i - 1] = i;
-        }
-        Utilities.shuffle(this.array);
+        this.solution = new int[this.data.getSize()];
     }
     
     public float getOptimalDistance() {
         return this.data.getOptimalTourEval();
     }
 
-    public float resolve() {
-        return this.data.evaluate(this.next());
+    public Result resolve() { 
+        for (int i = 1; i <= this.data.getSize(); i++) {
+            this.solution[i - 1] = i;
+        }
+        Utilities.shuffle(this.solution);
+        
+        Result result = new Result();
+        result.iteration = 0;
+        do {
+            result.solution = this.next();
+            result.iteration++;
+        } while (this.hasNext());
+        result.score = this.data.evaluate(result.solution);
+        
+        return result;
     }
 }

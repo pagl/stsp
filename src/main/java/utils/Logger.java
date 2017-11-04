@@ -29,7 +29,12 @@ public class Logger {
     
     public void write(String message) {
        // this.printWriter.println(message);
-       System.out.println(message);  // For easier debugging
+       System.out.print(message);  // HACK: For easier debugging
+    }
+    
+    public void writeln(String message) {
+       // this.printWriter.println(message);
+       System.out.println(message);  // HACK: For easier debugging
     }
 }
 

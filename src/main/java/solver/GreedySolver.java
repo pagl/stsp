@@ -1,6 +1,7 @@
 package solver;
 
 import data.Data;
+import java.util.Arrays;
 import java.util.Random;
 import utils.OptGenerator;
 
@@ -21,24 +22,31 @@ public class GreedySolver extends Solver {
     
     private final Random rand;
     private final OptGenerator<Integer> optGenerator;
+    private final int[] lastSolution;
 
     public GreedySolver(Data data) {
         super(data);
         this.rand = new Random();
-        this.optGenerator = new OptGenerator(array);
+        this.optGenerator = new OptGenerator(solution);
+        this.lastSolution = new int[this.data.getSize()];
     }
 
     @Override
     protected int[] next() {
-        float initialScore = this.data.evaluate(this.array);
-
+        float initialScore = this.data.evaluate(this.solution);
+        System.arraycopy(this.solution, 0, this.lastSolution, 0, this.solution.length);
+            
         for (int[] currentSolution : this.optGenerator) {
             if (this.data.evaluate(currentSolution) < initialScore) {
                 break;
             }
-        }
-        return this.array;
+        } 
+        return this.solution;
     }
     
+    @Override
+    protected boolean hasNext() {
+        return !Arrays.equals(this.lastSolution, this.solution);
+    }
 }
 
