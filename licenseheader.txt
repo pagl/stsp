@@ -1,8 +1,0 @@
-<#if licenseFirst??>
-${licenseFirst}
-</#if>
-${licensePrefix}Mateusz Ledzianowski inf117226
-${licensePrefix}Patryk Gliszczyñski inf117288
-<#if licenseLast??>
-${licenseLast}
-</#if>
