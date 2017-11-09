@@ -14,16 +14,26 @@ import net.sourceforge.argparse4j.inf.Namespace;
 public final class ArgParse {
         
         public Long time;
+        public Long iterations;
         public String dataPath;
         public String solver;
+        public String output;
         
         public ArgParse(String[] args) {
             ArgumentParser parser = ArgumentParsers.newFor("STSP").build()
                 .defaultHelp(true)
                 .description("Program to calculate STSP.");
+            parser.addArgument("-o", "--output")
+                    .type(String.class)
+                    .help("Output file name")
+                    .required(true);
             parser.addArgument("-t", "--time")
                     .type(long.class)
                     .help("Time limit")
+                    .required(true);
+            parser.addArgument("-i", "--iterations")
+                    .type(long.class)
+                    .help("Max iterations number")
                     .required(true);
             parser.addArgument("-d", "--data")
                     .type(String.class)
@@ -43,7 +53,9 @@ public final class ArgParse {
             }
             
             this.time = ns.getLong("time");
+            this.iterations = ns.getLong("iterations");
             this.dataPath = ns.getString("data");
             this.solver = ns.getString("solver");
+            this.output = ns.getString("output");
         }
     }
