@@ -1,0 +1,62 @@
+\documentclass{article} 
+\usepackage{polski} %moze wymagac dokonfigurowania latexa, ale jest lepszy niż standardowy babel'owy [polish] 
+\usepackage[utf8]{inputenc} 
+\usepackage[OT4]{fontenc} 
+\usepackage{graphicx,color} %include pdf's (and png's for raster graphics... avoid raster graphics!)
+\usepackage{url} 
+\usepackage[pdftex,hyperfootnotes=false,pdfborder={0 0 0}]{hyperref} %za wszystkimi pakietami; pdfborder nie wszedzie tak samo zaimplementowane bo specyfikacja nieprecyzyjna; pod miktex'em po prostu nie widac wtedy ramek
+
+\input{_ustawienia.tex}
+
+%\title{Sprawozdanie z laboratorium:\\Metaheurystyki i Obliczenia Inspirowane Biologicznie}
+%\author{}
+%\date{}
+
+\begin{document}
+
+\input{_tytulowa}
+
+\section*{Udział autorów}
+\begin{tightlist}
+\item PG zaimplementował..., przeprowadził eksperyment..., opisał..., przygotował...
+\item ML zaimplementowała..., przeprowadziła eksperyment..., opisała..., przygotowała...
+\end{tightlist}
+
+\clearpage
+
+\section{Symetryczny problem komiwojażera (STSP)}
+
+%krótki opis problemu, jego zastosowań i interpretacji, złożoności – do 20 linijek uzasadnienie wyboru instancji i ich nazwy
+\input{_opis_stsp} %ML
+
+\clearpage
+
+\section{Optymalizacja lokalna}
+
+%opis użytych operatorów sąsiedztwa (co najmniej jeden), wielkość sąsiedztwa
+\input{_optymalizacja_lokalna} %ML
+
+\clearpage
+
+\section{Eksperymenty}
+
+%porównanie działania 4 algorytmów i rodzajów sąsiedztw na wszystkich instancjach problemów
+% * odległość od optimum (wg jakiej miary?), przypadek średni i najlepszy (a dla chętnych również najgorszy). Dla średnich oceniamy stabilność wyników (na wykresy średnich nanosimy odchylenia standardowe)
+% * czas działania
+% * jakość/czas – efektywność algorytmów (proszę zaproponować dobrą miarę)
+% * GS: średnia liczba kroków algorytmu i liczba ocenionych (przejrzanych) rozwiązań
+%GS – wykres: jakość rozwiązania początkowego vs. jakość rozwiązania końcowego (min. 200 powtórzeń, małe punkty) dla kilku ciekawych instancji; ciekawe to takie, które pokazują jakąś niejednorodność
+%GS – zależność (wykres): liczba restartów (do >300) w multi-random vs. średnie i najlepsze z dotychczas znalezionych rozwiązań dla dwóch (max. kilku) wybranych instancji. Czy opłaca się powtarzać uruchamianie? jeśli tak, to ile razy?
+%obiektywna ocena podobieństwa znajdowanych rozwiązań lokalnie optymalnych dla dwóch wybranych instancji oraz ocena ich podobieństwa do optimum globalnego (jeśli dla ATSP nie znamy globalnego, używamy najlepszego lokalnego)
+\input{_eksperymenty} %ML
+
+\clearpage
+
+\section{Podsumowanie}
+
+%wnioski (od ogólnych do szczegółowych) z przeprowadzonych doświadczeń
+%trudności na jakie napotkano
+%uzasadnienie wprowadzanych ulepszeń, propozycje udoskonaleń i ich spodziewane efekty
+\input{_wnioski} %PG
+
+\end{document}
