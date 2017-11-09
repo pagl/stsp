@@ -11,30 +11,52 @@ import java.io.PrintWriter;
  * @author Mateusz Ledzianowski
  */
 
-public class Logger {
+public final class Logger {
     
+    private final String fileName;
+    private boolean debugMode;
     private FileWriter fileWriter;
-    private final BufferedWriter bufferedWriter;
-    private final PrintWriter printWriter;
+    private BufferedWriter bufferedWriter;
+    private PrintWriter printWriter;
+    
     
     public Logger(String name) {
+        this.fileName = name;
+        this.initialize();
+    }
+    
+    public Logger(String name, boolean debugMode) {
+        this.fileName = name;
+        this.debugMode = debugMode;
+        this.initialize();
+    }
+    
+    @Override
+    protected void finalize() throws Throwable {
+        this.bufferedWriter.close();
+        super.finalize();
+    }
+    
+    protected void initialize() {
         try {
-            this.fileWriter = new FileWriter(name, true);
+            this.fileWriter = new FileWriter(this.fileName, true);
         } catch (IOException e) {
             e.printStackTrace();
         }
         this.bufferedWriter = new BufferedWriter(this.fileWriter);
-        this.printWriter = new PrintWriter(this.bufferedWriter);
+        this.printWriter = new PrintWriter(this.bufferedWriter, true);
     }
     
     public void write(String message) {
-       // this.printWriter.println(message);
-       System.out.print(message);  // HACK: For easier debugging
+        this.printWriter.print(message);
+        if (this.debugMode)
+            System.out.print(message);
     }
     
     public void writeln(String message) {
-       // this.printWriter.println(message);
-       System.out.println(message);  // HACK: For easier debugging
+        this.printWriter.println(message);
+        if (this.debugMode)
+            System.out.println(message);
     }
 }
 

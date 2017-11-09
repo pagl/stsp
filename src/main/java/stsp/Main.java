@@ -28,17 +28,18 @@ public class Main {
             case "heuristic":
                 solver = new HeuristicSolver(data);
                 break;
-            case "greedy":  // IDEA: Should we stop solver when it can't find a better solution?
+            case "greedy":
                 solver = new GreedySolver(data);
                 break;
-            case "steepest": // IDEA: Same as for greedy.
+            case "steepest":
                 solver = new SteepestSolver(data);
                 break;
             default:
                 throw new Exception("Unknown solver name.");
         }
         
-        Experiment experiment = new Experiment(solver, arguments.time);
+        Experiment experiment = new Experiment(solver, arguments.time, 
+                                               arguments.iterations, arguments.output);
         experiment.run();
     }
 }
