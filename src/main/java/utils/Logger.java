@@ -21,7 +21,7 @@ public final class Logger {
     
     
     public Logger(String name) {
-        this.fileName = name;
+        this.fileName = name + ".res";
         this.initialize();
     }
     

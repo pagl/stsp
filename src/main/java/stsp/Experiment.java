@@ -32,13 +32,15 @@ public class Experiment {
             Solver.Result result = this.solver.resolve();
             currentTime = System.nanoTime();
             logger.write(String.valueOf(iter++) + ",");
+            logger.write(String.valueOf(result.initialScore) + ",");
             logger.write(String.valueOf(result.score) + ",");
-            logger.write(String.valueOf(result.iteration) + ",");
+            logger.write(String.valueOf(result.iterations) + ",");
+            logger.write(String.valueOf(result.steps) + ",");
             logger.writeln(String.valueOf((currentTime - iterStartTime) / 1e6));         
         } while (currentTime - startTime < this.timeLimit * 1e6 && 
                  iter < this.iterLimit);
         
-        logger.writeln("-1," + String.valueOf(this.solver.getOptimalDistance()) + ",-1");
+        logger.writeln(String.valueOf(this.solver.getOptimalDistance()));
     }
     
 }

@@ -38,8 +38,8 @@ public class Main {
                 throw new Exception("Unknown solver name.");
         }
         
-        Experiment experiment = new Experiment(solver, arguments.time, 
-                                               arguments.iterations, arguments.output);
+        Experiment experiment = new Experiment(solver, arguments.time, arguments.iterations, 
+                                               arguments.output);
         experiment.run();
     }
 }

@@ -20,12 +20,16 @@ public abstract class Solver {
     
     public class Result {
         public int[] solution;
+        public float initialScore;
         public float score;
-        public int iteration;
+        public int iterations;
+        public int steps;
     }
     
     protected final Data data;
     protected final int[] solution;
+    protected int steps;
+    
     
     public Solver(Data data) {
         this.data = data;
@@ -43,12 +47,15 @@ public abstract class Solver {
         Utilities.shuffle(this.solution);
         
         Result result = new Result();
-        result.iteration = 0;
+        result.initialScore = this.data.evaluate(this.solution);
+        result.iterations = 0;
+        this.steps = 0;
         do {
             result.solution = this.next();
-            result.iteration++;
+            result.iterations++;
         } while (this.hasNext());
         result.score = this.data.evaluate(result.solution);
+        result.steps = this.steps;
         
         return result;
     }

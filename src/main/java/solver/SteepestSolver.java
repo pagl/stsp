@@ -38,6 +38,7 @@ public class SteepestSolver extends Solver {
         System.arraycopy(this.solution, 0, this.lastSolution, 0, this.solution.length);
 
         for (int[] currentSolution : this.optGenerator) {
+            this.steps++;
             currentScore = this.data.evaluate(currentSolution);
             if (currentScore < bestScore) {
                 bestScore = currentScore;
