@@ -3,3 +3,4 @@ nb-configuration.xml
 licenseheader.txt
 nbactions.xml
 docs/results
+*.pyc
