@@ -3,7 +3,9 @@
 \usepackage[utf8]{inputenc} 
 \usepackage[OT4]{fontenc} 
 \usepackage{graphicx,color} %include pdf's (and png's for raster graphics... avoid raster graphics!)
-\usepackage{url} 
+\usepackage{url}
+\usepackage{listings}
+\usepackage{enumerate}
 \usepackage[pdftex,hyperfootnotes=false,pdfborder={0 0 0}]{hyperref} %za wszystkimi pakietami; pdfborder nie wszedzie tak samo zaimplementowane bo specyfikacja nieprecyzyjna; pod miktex'em po prostu nie widac wtedy ramek
 
 \input{_ustawienia.tex}
@@ -58,5 +60,10 @@
 %trudności na jakie napotkano
 %uzasadnienie wprowadzanych ulepszeń, propozycje udoskonaleń i ich spodziewane efekty
 \input{_wnioski} %PG
+
+%%%%%%%%%%%%%%%% literatura %%%%%%%%%%%%%%%%
+
+\bibliography{sprawozd}
+\bibliographystyle{plain}
 
 \end{document}

@@ -1,15 +1,47 @@
 \subsection{Opis problemu}
 
-...
+Symetryczny problem komiwojażera modeluje sytuację znaną z rzeczywistego świata, w której osoba ma odwiedzić konkretne miejsca w dowolnej kolejności i wrócić do miejsca początkowego tak, aby pokonać jak najkrótszą drogę. Z tego typu zadaniem mierzą się przede wszystkim wszyscy dostawcy, listonosze, akwizytorzy. W symetrycznym problemie komiwojażera odległości pomiędzy dwoma miejscami są takie same w obie strony. Problem nie daje możliwości tworzenia dróg jednokierunkowych, a także budowana sieć dróg jest grafem pełnym.
 
 \subsection{Złożoność}
 
-...
+W~tak~postawionym problemie, istnieje różnych $\theta(n!)$ rozwiązań, gdzie~$n$ oznacza liczbę miejsc do~odwiedzenia. Miejsca możemy odwiedzać w~dowolnej kolejności, więc~jeśli zostaną one ponumerowane od~1~do~n, każda~permutacja n-elementowa może~reprezentować pełne rozwiązanie. Rozwiązanie w~postaci permutacji możemy odczytywać w~taki~sposób, że~z~miejsca na~pozycji $i$, przemieszczamy się do~miejsca na~pozycji $i+1$, pamiętając o~tym, żeby~z~miejsca na~pozycji $n$ wrócić do startowego o indeksie $1$. Przestrzeń rozwiązań jest więc bardzo duża i trudno jest przejrzeć je wszystkie. Jeśli bylibyśmy w stanie sprawdzać $1'000'000'000$ rozwiązań w czasie $1$ sekundy, rozwiązania dokładnego dla $n=16$, szukalibyśmy przez ok.~$6h$, a~znalezienie go~dla~$n=20$ zajęłoby $77$~lat.
+
+\subsection{Rozwiązanie losowe}
+
+Ponieważ rozwiązania można reprezentować w postaci permutacji, da się w łatwy i szybki sposób wygenerować losowe początkowe rozwiązanie dla wielu innych algorytmów poprzez wygenerowanie losowej permutacji. Złożoność generowania permutacji to $\theta(n)$, gdzie~$n$ jest jej długością. Aby wygenerować losową permutację należy zastosować poniższą procedurę:
+
+\begin{enumerate}
+    \item Wypełnij tablicę liczbami od $1$ do $n$.
+    \item $i := n$.
+    \item Zamień element z pozycji $i-1$ z elementem na losowej wcześniejszej lub tej samej pozycji (od $0$ do $i-1$).
+    \item $i := i-1$.
+    \item Jeżeli $i>1$, wróć do kroku 2.
+\end{enumerate}
 
 \subsection{Heurystyka}
 
-...
+Dla problemu komiwojażera istnieje prosta heurystyka o złożoności $\theta(n^2)$, dająca zadowalające wyniki - przeciętnie odległe od rozwiązania optymalnego o~$10-15\%$.~\cite{Heuristic} Polega ona na wykonaniu poniższych kroków:
 
-\subsection{Wybrane instancje}
+\begin{enumerate}
+    \item Wybierz losowe miasto początkowe.
+    \item Znajdź najbliższe nieodwiedzone miasto i udaj się tam.
+    \item Jeśli pozostały jeszcze jakieś nieodwiedzone miasta, idź do kroku 2.
+    \item Wróć do początkowego miasta.
+\end{enumerate}
 
-...
+\subsection{Instancje problemu}
+
+Problem jest bardzo powszechny i istnieje wiele gotowych instancji, których można użyć w badaniach. Wybraliśmy 8 instancji z udostępnionego przez uniwersytet ,,Heidelberg'' zbioru.~\cite{instances} Są to:
+
+\begin{enumerate}
+    \item berlin52,
+    \item ch130,
+    \item eil51,
+    \item kroA100,
+    \item lin105,
+    \item pcb442,
+    \item pr76,
+    \item rd100.
+\end{enumerate}
+
+Przy doborze konkretnych instancji zależało nam na tym, aby nie były one zbyt duże (przeważnie do 200 miast), a także miały znalezione rozwiązania optymalne, były różnorodne oraz podane w formacie EUC_2D, czyli za pomocą współrzędnych na dwuwymiarowej płaszczyźnie Euklidesowej.

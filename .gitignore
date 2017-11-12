@@ -2,3 +2,13 @@ target
 nb-configuration.xml
 licenseheader.txt
 nbactions.xml
+docs/sprawozd.aux
+docs/sprawozd.log
+docs/sprawozd.out
+sprawozd.synctex.gz
+docs/sprawozd.pdf
+docs/_eksperymenty.log
+docs/_opis_stsp.log
+docs/sprawozd.bbl
+docs/sprawozd.blg
+
