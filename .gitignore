@@ -12,3 +12,4 @@ docs/_eksperymenty.log
 docs/_opis_stsp.log
 docs/sprawozd.bbl
 docs/sprawozd.blg
+*.pyc
