@@ -1,36 +1,46 @@
 \subsection{Odległość od optimum}
 
-\subsubsection{Przypadek średni}
-
-...
+Z rys. \ref{fig:avg} wynika, że dla każdej instancji problemu, heurystyka i algorytmy przeszukiwania lokalnego osiągają podobne wyniki, które są kilkukrotnie lepsze od rozwiązania losowego, z którego startują zarówno Greedy, jak i Steepest.
 
 \begin{figure}
 \begin{center}
-%\includegraphics[width=0.8\textwidth]{rys_average_solution.pdf}
+\includegraphics[width=0.8\textwidth]{graphs/algorithm_score_comparison_bar_avg.png}
 \end{center}
 \caption{Porównanie średnich rozwiązań na~różnych instancjach.}
 \label{fig:avg}
 \end{figure}
 
-\subsubsection{Przypadek najlepszy}
-
-...
-
 \begin{figure}
 \begin{center}
-%\includegraphics[width=0.8\textwidth]{rys_best_solution.pdf}
+\includegraphics[width=0.8\textwidth]{graphs/algorithm_score_comparison_bar_min.png}
 \end{center}
 \caption{Porównanie najlepszych znalezionych rozwiązań przez~algorytmy na~różnych instancjach.}
 \label{fig:best}
 \end{figure}
 
-\subsection{Czas działania}
-
-...
+\begin{figure}
+\begin{center}
+\includegraphics[width=0.8\textwidth]{graphs/algorithm_score_comparison_bar_max.png}
+\end{center}
+\caption{Porównanie najgorszych znalezionych rozwiązań przez~algorytmy na~różnych instancjach.}
+\label{fig:worst}
+\end{figure}
 
 \begin{figure}
 \begin{center}
-%\includegraphics[width=0.8\textwidth]{rys_time.pdf}
+\includegraphics[width=0.8\textwidth]{graphs/algorithm_score_comparison_violin.png}
+\end{center}
+\caption{Porównanie rozkładów znalezionych rozwiązań przez~algorytmy na~różnych instancjach.}
+\label{fig:distribution}
+\end{figure}
+
+\subsection{Czas działania}
+
+Algorytm losowy oraz heurystyka są zdecydowanie najszybsze, ponieważ każde z nich sprawdza tylko jedno rozwiązanie. Greedy i Steepest przeszukują przestrzeń rozwiązań, dopóki nie mogą już bardziej poprawić wyniku, co zajmuje znacznie więcej czasu.
+
+\begin{figure}
+\begin{center}
+%\includegraphics[width=0.8\textwidth]{graphs/rys_time.pdf}
 \end{center}
 \caption{Porównanie czasu działania algorytmów na~poszczególnych instancjach.}
 \label{fig:best}
@@ -40,18 +50,26 @@
 
 \subsubsection{Wybrana miara}
 
-...
+Aby porównać algorytmy pod względem jakości, można to zrobić przez zdefiniowanie kosztu czasowego, jaki trzeba ponieść, aby uzyskać dane rozwiązanie. Czyli należy policzyć iloraz $cost = time / result$, co przedstawia rys. \ref{fig:cost}. Natomiast efektywnością algorytmu jest odwrotność kosztu, która została przedstawiona na rys. \ref{fig:quality}.
 
 \subsubsection{Wyniki}
 
-...
+Z wykresów \ref{fig:cost} i \ref{fig:quality} można by wyciągnąć wniosek, że najefektywniejszym algorytmem są losowy i heurystyka, ponieważ zajmują najmniej czasu. Nie można przy tym jednak zapominać... %TODO
 
 \begin{figure}
 \begin{center}
-%\includegraphics[width=0.8\textwidth]{rys_efficiency.pdf}
+%\includegraphics[width=0.8\textwidth]{graphs/rys_efficiency.pdf}
+\end{center}
+\caption{Porównanie kosztów algorytmów na~poszczególnych instancjach.}
+\label{fig:cost}
+\end{figure}
+
+\begin{figure}
+\begin{center}
+%\includegraphics[width=0.8\textwidth]{graphs/rys_efficiency.pdf}
 \end{center}
 \caption{Porównanie efektywności algorytmów na~poszczególnych instancjach.}
-\label{fig:eff}
+\label{fig:quality}
 \end{figure}
 
 \subsection{Średnia liczba kroków}
@@ -60,7 +78,7 @@
 
 \begin{figure}
 \begin{center}
-%\includegraphics[width=0.8\textwidth]{rys_steps.pdf}
+%\includegraphics[width=0.8\textwidth]{graphs/rys_steps.pdf}
 \end{center}
 \caption{Porównanie algorytmów Greedy Search i~Steepest pod~względem liczby kroków do~zatrzymania.}
 \label{fig:steps}
@@ -72,7 +90,7 @@
 
 \begin{figure}
 \begin{center}
-%\includegraphics[width=0.8\textwidth]{rys_n_solutions.pdf}
+%\includegraphics[width=0.8\textwidth]{graphs/rys_n_solutions.pdf}
 \end{center}
 \caption{Porównanie algorytmów Greedy Search i~Steepest pod~względem liczby przeszukanych rozwiązań.}
 \label{fig:nsol}
@@ -86,7 +104,7 @@
 
 \begin{figure}
 \begin{center}
-%\includegraphics[width=0.8\textwidth]{rys_difference_start_final.pdf}
+%\includegraphics[width=0.8\textwidth]{graphs/rys_difference_start_final.pdf}
 \end{center}
 \caption{Porównanie jakości rozwiązań początkowych i~końcowych przez~algorytmy Greedy Search i~Steepest.}
 \label{fig:diff}
@@ -98,7 +116,7 @@
 
 \begin{figure}
 \begin{center}
-%\includegraphics[width=0.8\textwidth]{rys_more_starts.pdf}
+%\includegraphics[width=0.8\textwidth]{graphs/rys_more_starts.pdf}
 \end{center}
 \caption{Porównanie jakości rozwiązań algorytmów Gready Search i~Steepest w~zależności od~liczby uruchomień tych algorytmów dla~różnych rozwiązań początkowych.}
 \label{fig:more}
@@ -116,7 +134,7 @@
 
 \begin{figure}
 \begin{center}
-%\includegraphics[width=0.8\textwidth]{rys_opt_distance.pdf}
+%\includegraphics[width=0.8\textwidth]{graphs/rys_opt_distance.pdf}
 \end{center}
 \caption{Porównanie odległości znajdowanych rozwiązań przez algorytmy od rozwiązania optymalnego.}
 \label{fig:dist}
