@@ -4,24 +4,24 @@ Algorytmy optymalizacji lokalnej pozwalają na poszukiwanie lepszych rozwiązań
 
 \subsection{Operatory sąsiedztwa}
 
-Aby stosować przeszukiwanie lokalne, należy określić sąsiedztwo dla każdego rozwiązania. Jest to przestrzeń rozwiązań, które są podobne do posiadanego. Jednym z możliwych sąsiedztw jest OPT-2.
+Aby stosować przeszukiwanie lokalne, należy określić sąsiedztwo dla każdego rozwiązania. Jest~to~przestrzeń rozwiązań, które~są~podobne do~posiadanego. Jednym z~możliwych sąsiedztw jest~OPT-2.
 
 \subsubsection{OPT-2}
 
-Sąsiedztwo OPT-2 definiuje się poprzez zamianę kolejności wierzchołków na dwóch pozycjach lub odwrócenie kolejności odwiedzania miast na łuku pomiędzy dwoma pozycjami. W zależności od tego, czy rozważany problem komiwojażera jest symetryczny, czy nie - różne sąsiedztwa sprawdzają się z odmienną skutecznością. Rozważając, które z sąsiedztw wybrać, należy zastanowić się, które z nich w najmniejszym stopniu wpływa na funkcję celu.
+Sąsiedztwo OPT-2 definiuje się poprzez zamianę kolejności wierzchołków na~dwóch pozycjach lub~odwrócenie kolejności odwiedzania miast na~łuku pomiędzy dwoma pozycjami. W~zależności od~tego, czy~rozważany problem komiwojażera jest~symetryczny, czy~nie --- różne sąsiedztwa sprawdzają się z~odmienną skutecznością. Rozważając, które z~sąsiedztw wybrać, należy zastanowić się, które z~nich w~najmniejszym stopniu wpływa na~funkcję celu.
 
 \paragraph{Zamiana miast}
 
-Sąsiedztwo OPT-2 polegające na zamianie miast można zaimplementować poprzez prostą zamianę elementów na pozycji i-tej i j-tej. Jest ono skuteczniejsze dla problemu asymetrycznego komiwojażera, ponieważ zamiana łuków spowodowałaby większą różnicę w funkcji celu -- inne byłyby nie tylko cztery drogi, prowadzące do dwóch zamienianych miast, lecz także wszystkie drogi na łuku.
+Sąsiedztwo OPT-2 polegające na zamianie miast można zaimplementować poprzez prostą zamianę elementów na pozycji i-tej i j-tej. Jest ono skuteczniejsze dla problemu asymetrycznego komiwojażera, ponieważ zamiana łuków spowodowałaby większą różnicę w~funkcji celu --- inne byłyby nie tylko cztery drogi, prowadzące do dwóch zamienianych miast, lecz także wszystkie drogi na łuku.
 
 \paragraph{Odwrócenie łuku}
 
-W przypadku odwrócenia łuku pomiędzy miastami na pozycjach i-tej i j-tej, funkcja celu ulegnie zmianie spowodowanej tylko modyfikacją dwóch dróg prowadzących do miast i-tego i j-tego z jednej strony, a z drugiej odwrócenie łuku, gdy drogi w obie strony mają taką samą długość, niczego nie zmieni.
+W przypadku odwrócenia łuku pomiędzy miastami na pozycjach i-tej i~j-tej, funkcja celu ulegnie zmianie spowodowanej tylko modyfikacją dwóch dróg prowadzących do~miast i-tego i j-tego z~jednej strony, a~z~drugiej odwrócenie łuku, gdy~drogi w~obie strony mają taką samą długość, niczego nie~zmieni.
 
 \subsection{Greedy}
 
-Jednym z algorytmów przeszukiwania lokalnego jest algorytm Greedy. Polega on na tym, że jeśli w momencie przeszukiwania sąsiedztwa aktualnego rozwiązania, znajdzie rozwiązanie lepsze, natychmiast je wybiera jako aktualne i szuka następnego w jego sąsiedztwie, dopóki istnieją rozwiązania poprawiające aktualne.
+Jednym z~algorytmów przeszukiwania lokalnego jest~algorytm Greedy. Polega on~na~tym, że~jeśli w~momencie przeszukiwania sąsiedztwa aktualnego rozwiązania, znajdzie rozwiązanie lepsze, natychmiast je~wybiera jako~aktualne i~szuka następnego w~jego sąsiedztwie, dopóki istnieją rozwiązania poprawiające aktualne.
 
 \subsection{Steepest}
 
-Algorytm Steepest różni się od poprzednika tym, że gdy przegląda swoje sąsiedztwo, nie wybiera jako aktualne rozwiązanie, pierwszego znalezionego, lepszego rozwiązania, ale zawsze przegląda wszystkich sąsiadów i wybiera najlepszego spośród nich, dzięki czemu porusza się ,,po najbardziej stromym zboczu'' na wykresie funkcji celu.
+Algorytm Steepest różni się od~poprzednika tym, że~gdy~przegląda swoje sąsiedztwo, nie~wybiera jako~aktualne rozwiązanie, pierwszego znalezionego, lepszego rozwiązania, ale~zawsze przegląda wszystkich sąsiadów i~wybiera najlepszego spośród nich, dzięki czemu porusza się ,,po najbardziej stromym zboczu'' na~wykresie funkcji celu.

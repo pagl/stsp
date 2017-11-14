@@ -1,9 +1,17 @@
 \subsection{Wnioski}
 
-...
+W problemie symetrycznego komiwojażera, stosunkowo łatwo znaleźć dość dobre rozwiązanie za pomocą prostej heurystyki, którą też można jeszcze udoskonalić.
+
+Algorytmy przeszukiwania lokalnego przeważnie znajdują jednak jeszcze lepsze rozwiązania, nieraz nawet optymalne (przy instancjach o liczności ok. 50 miast), pracując wielokrotnie dłużej, jednak wciąż nie dłużej niż minutę dla wybranych instancji. Algorytmy przeszukiwania lokalnego mimo, że zaczynają ze stosunkowo słabym rozwiązaniem losowym, wciąż poszukując lepszych w jego sąsiedztwie, potrafią osiągać bardzo dobre wyniki.
+
+Porównując algorytmy Greedy i Steepest, można zauważyć, że ostatecznie oba zwracają podobnej jakości rozwiązania. Steepest wykonuje kilkakrotnie mniej kroków, jednak w każdym z nim musi przeszukać całe sąsiedztwo aktualnego rozwiązania, w konsekwencji czego, sumarycznie, przeszukuje większą przestrzeń rozwiązań i trwa dłużej od algorytmu Greedy. Zaobserwowaliśmy, że ta tendencja jest odwrotna dla dla największej, wybranej instancji.
 
 \subsection{Trudności}
 
-...
+Jednym z głównych problemów, jakie wystąpiły podczas prezentacji wyników, było odpowiednie dobranie wykresów. Mimo, że 3 z 4 prezentowanych algorytmów dawało zbliżone wyniki, to random zawsze znacznie się od nich różnił, przez co trudno było tak wyskalować wykresy, aby wyraźnie było widać wszystkie zależności. 
+
+Innym problemem jest odpowiednie dobranie parametrów, aby każdy algorytm został uruchomiony odpowiednią liczbę razy dla każdej instancji, ale jednocześnie, by generowanie obliczenia nie trwały zbyt długo.
 
 \subsection{Propozycje udoskonaleń}
+
+Warta zbadania na pewno jest sytuacja zaobserwowana dla największej instancji, w której Steepest okazuje się być lepszy od algorytmu Greedy pod względem czasu wykonania, przegląda też mniejszą liczbę rozwiązań. Warto sprawdzić, czy ta tendencja utrzymuje się dla przykładów z większą liczbą miast.
