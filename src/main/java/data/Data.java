@@ -207,6 +207,10 @@ public class Data {
         return evaluate(this.currentTour); 
     }
     
+    public int[] getFullOptimalTour() { 
+        return this.optimalTour; 
+    }
+    
     public int getOptimalTour(int i) { 
         return this.optimalTour[i]; 
     }

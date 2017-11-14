@@ -139,6 +139,7 @@ def init_vs_final_score(data, output_dir):
 
 
 def multi_start_score(data, output_dir):
+    plt.clf()
     for instance in data.instance.unique():
         instance_data = data[data.instance == instance]
         for algorithm in ["random", "greedy", "steepest"]:
@@ -149,3 +150,11 @@ def multi_start_score(data, output_dir):
         plt.legend()
         save_figure("multi_start_score{}".format(instance), output_dir)
         plt.clf()
+
+
+def similarity_comparision(data, output_dir):
+    grid = get_facet_grid(data)
+    grid.map(sns.pointplot, "final_score", "similarity", "algorithm",
+             hue_order=["random", "heuristic", "greedy", "steepest"],
+             join=False)
+    save_figure("similarity_comparision", output_dir)

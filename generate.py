@@ -33,10 +33,11 @@ GRAPH_DIR = os.path.join("docs", "graphs")
 AGG_DATA_FILE = "agg_data.csv"
 AGG_DATA_FIELDS = ["algorithm", "instance", "run_id", "init_score",
                    "final_score", "best_so_far", "iterations",
-                   "steps", "run_time", "quality", "cost"]
+                   "steps", "run_time", "similarity", "quality", "cost"]
 
 ALGORITHMS = ["random", "heuristic", "greedy", "steepest"]
-EXPERIMENT_MAX_TIME = 1000
+EXPERIMENT_MAX_TIME = 5000
+EXPERIMENT_MIN_ITER = 10
 EXPERIMENT_MAX_ITER = 400
 
 
@@ -53,21 +54,22 @@ def aggregate_results(clear_dir=True):
         data = open(filepath).read().strip().split("\n")
         for row in data[:-1]:
             row = row.split(",")
-            cost = float(row[5]) / float(row[2])
+            cost = float(row[6]) / float(row[2])
             quality = 1 / cost
             data_points.append([algorithm, instance] + row + [str(quality), str(cost)])
-        data_points.append(["optimal", instance, "-1", "-1", data[-1], "-1", "-1", "-1", "-1", "-1"])
+        data_points.append(["optimal", instance, "-1", "-1", data[-1], "-1", "-1", "-1", "-1", "-1", "-1", "-1"])
     if clear_dir:
         clear_directory(OUTPUT_DIR)
     open(os.path.join(OUTPUT_DIR, AGG_DATA_FILE), "w").write("\n".join(map(",".join, data_points)))
 
 
-def run_experiment(datafile, max_time, max_iter, algorithm, output):
+def run_experiment(datafile, max_time, min_iter, max_iter, algorithm, output):
     subprocess.call(["java", "-cp", APP_PATH, MAIN_CLASS,
                      "-d", datafile,
                      "-o", output,
                      "-t", str(max_time),
-                     "-i", str(max_iter),
+                     "-i", str(min_iter),
+                     "-I", str(max_iter),
                      "-s", algorithm])
 
 
@@ -80,6 +82,7 @@ def generate_results():
             print("    {:<20}{}".format(algorithm, datetime.now()))
             run_experiment(datafile=datafile.rstrip(".tsp"),
                            max_time=EXPERIMENT_MAX_TIME,
+                           min_iter=EXPERIMENT_MIN_ITER,
                            max_iter=EXPERIMENT_MAX_ITER,
                            algorithm=algorithm,
                            output=os.path.join(OUTPUT_DIR,
@@ -98,6 +101,7 @@ def generate_graphs():
     quality_comparison(data, GRAPH_DIR)
     init_vs_final_score(data, GRAPH_DIR)
     multi_start_score(data, GRAPH_DIR)
+    similarity_comparision(data, GRAPH_DIR)
 
 
 def parse_args():

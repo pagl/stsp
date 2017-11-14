@@ -9,19 +9,18 @@ import solver.SteepestSolver;
 import utils.ArgParse;
 
 /**
- * 
+ *
  * @author Patryk Gliszczynski
  * @author Mateusz Ledzianowski
  */
-
 public class Main {
-    
+
     public static void main(String[] args) throws Exception {
         ArgParse arguments = new ArgParse(args);
         Data data = Data.load(arguments.dataPath);
         Solver solver = null;
 
-        switch(arguments.solver) {
+        switch (arguments.solver) {
             case "random":
                 solver = new RandomSolver(data);
                 break;
@@ -37,11 +36,9 @@ public class Main {
             default:
                 throw new Exception("Unknown solver name.");
         }
-        
-        Experiment experiment = new Experiment(solver, arguments.time, arguments.iterations, 
-                                               arguments.output);
+
+        Experiment experiment = new Experiment(solver, arguments.time,
+                arguments.minIterations, arguments.maxIterations, arguments.output);
         experiment.run();
     }
 }
-
-

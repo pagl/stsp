@@ -14,7 +14,8 @@ import net.sourceforge.argparse4j.inf.Namespace;
 public final class ArgParse {
         
         public Long time;
-        public Long iterations;
+        public Long minIterations;
+        public Long maxIterations;
         public String dataPath;
         public String solver;
         public String output;
@@ -31,7 +32,11 @@ public final class ArgParse {
                     .type(long.class)
                     .help("Time limit")
                     .required(true);
-            parser.addArgument("-i", "--iterations")
+            parser.addArgument("-i", "--miniterations")
+                    .type(long.class)
+                    .help("Min iterations number")
+                    .required(true);
+            parser.addArgument("-I", "--maxiterations")
                     .type(long.class)
                     .help("Max iterations number")
                     .required(true);
@@ -53,7 +58,8 @@ public final class ArgParse {
             }
             
             this.time = ns.getLong("time");
-            this.iterations = ns.getLong("iterations");
+            this.minIterations = ns.getLong("miniterations");
+            this.maxIterations = ns.getLong("maxiterations");
             this.dataPath = ns.getString("data");
             this.solver = ns.getString("solver");
             this.output = ns.getString("output");
