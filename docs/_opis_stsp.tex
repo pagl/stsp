@@ -1,14 +1,14 @@
 \subsection{Opis problemu}
 
-Problem komiwojażera modeluje sytuację znaną ze świata rzeczywistego, w której pewien obiekt stara się odwiedzić wszystkie punkty z danego zbioru punktów oraz wrócić do miejsca początkowego, w kolejności minimalizującej całkowity koszt podróży. Z tego typu zadaniem mierzą się między innymi wszelkiego rodzaju dostawcy usług transportowych, listonosze, czy akwizytorzy. W symetrycznym problemie komiwojażera koszt pomiędzy dowolnymi dwoma wierzchołkami w grafie połączeń jest identyczny w obydwie strony. W naszym problemie sieć połączeń pomiędzy poszczególnymi wierzchołkami opisana jest grafem pełnym, co oznacza że istnieje połączenie między każdą parą wierzchołków w grafie.
+Problem komiwojażera modeluje sytuację znaną ze świata rzeczywistego, w której pewien obiekt stara się odwiedzić wszystkie punkty z danego zbioru punktów oraz wrócić do miejsca początkowego, w kolejności minimalizującej całkowity koszt podróży. Z tego typu zadaniem mierzą się między innymi wszelkiego rodzaju dostawcy usług transportowych, listonosze, czy~akwizytorzy. W symetrycznym problemie komiwojażera koszt pomiędzy dowolnymi dwoma wierzchołkami w grafie połączeń jest identyczny w obydwie strony. W naszym problemie sieć połączeń pomiędzy poszczególnymi wierzchołkami opisana jest grafem pełnym, co oznacza że istnieje połączenie między każdą parą wierzchołków w grafie.
 
 \subsection{Złożoność}
 
-W tak postawionym problemie, istnieje $n!$  różnych rozwiązań, gdzie $n$ oznacza liczbę wierzchołków w grafie. Punkty możemy odwiedzać w dowolnej kolejności, zatem jeżeli zostaną one ponumerowane od 1 do n, to każda permutacja n-elementowa może reprezentować pełne rozwiązanie. Rozwiązanie w postaci permutacji możemy odczytywać w~taki~sposób, że~z~miejsca na~pozycji $i$, przemieszczamy się do~miejsca na~pozycji $i+1$, pamiętając o~tym, żeby~z~miejsca na~pozycji $n$ wrócić do punktu startowego. Przestrzeń rozwiązań jest bardzo duża, oraz kosztowna obliczeniowo przy chęci wyznaczenia każdej istniejącej permutacji. Jeśli bylibyśmy w stanie sprawdzać $1\ 000\ 000\ 000$ rozwiązań w czasie $1$ sekundy, rozwiązania dokładnego dla $n=16$, szukalibyśmy przez ok.~$6h$, a~znalezienie go~dla~$n=20$ zajęłoby $77$~lat.
+W~tak postawionym problemie, istnieje $n!$~różnych rozwiązań, gdzie~$n$ oznacza liczbę wierzchołków w~grafie. Punkty możemy odwiedzać w~dowolnej kolejności, zatem jeżeli zostaną one ponumerowane od~1 do~n, to~każda permutacja n-elementowa może~reprezentować pełne rozwiązanie. Rozwiązanie w~postaci permutacji możemy odczytywać w~taki~sposób, że~z~miejsca na~pozycji $i$, przemieszczamy się do~miejsca na~pozycji $i+1$, pamiętając o~tym, żeby~z~miejsca na~pozycji $n$ wrócić do~punktu startowego. Przestrzeń rozwiązań jest bardzo duża, oraz~kosztowna obliczeniowo przy~chęci wyznaczenia każdej istniejącej permutacji. Jeśli bylibyśmy w~stanie sprawdzać $1\ 000\ 000\ 000$ rozwiązań w~czasie $1$ sekundy, rozwiązania dokładnego dla~$n=16$, szukalibyśmy przez ok.~$6h$, a~znalezienie go~dla~$n=20$ zajęłoby $77$~lat.
 
 \subsection{Rozwiązanie losowe}
 
-Ponieważ rozwiązanie można reprezentować w postaci permutacji, możliwym jest wygenerowanie rozwiązania losowego poprzez przeprowadzenie losowej permutacji wierzchołków z rozwiązania początkowego. Złożoność obliczeniowa takiej operacji wynosi $\theta(n)$, gdzie $n$ jest długością rozwiązania początkowego. Aby wygenerować losową permutację należy zastosować poniższą procedurę:
+Ponieważ rozwiązanie można reprezentować w~postaci permutacji, możliwym jest~wygenerowanie rozwiązania losowego poprzez przeprowadzenie losowej permutacji wierzchołków z~rozwiązania początkowego. Złożoność obliczeniowa takiej operacji wynosi $\theta(n)$, gdzie~$n$ jest~długością rozwiązania początkowego. Aby~wygenerować losową permutację należy zastosować poniższą procedurę:
 
 \begin{enumerate}
     \item Wypełnij tablicę liczbami od $1$ do $n$.
@@ -22,21 +22,21 @@ Ponieważ rozwiązanie można reprezentować w postaci permutacji, możliwym jes
 
 \subsection{Heurystyka}
 
-Dla symetrycznego problemu komiwojażera możliwe jest znalezienie prostej heurystyki o złożoności $\theta(n^2)$ dającej satysfakcjonujące rezultaty, przeciętnie odległe od rozwiązania optymalnego o $10-15\%$.~\cite{Heuristic}. W celu wyznaczenia rozwiązania z wykorzystaniem algorytmu heurystycznego, należy postępować zgodnie z następującymi krokami:
+Dla~symetrycznego problemu komiwojażera możliwe jest~znalezienie prostej heurystyki o~złożoności $\theta(n^2)$ dającej satysfakcjonujące rezultaty, przeciętnie odległe od~rozwiązania optymalnego o~$10-15\%$.~\cite{Heuristic}. W~celu wyznaczenia rozwiązania z~wykorzystaniem algorytmu heurystycznego, należy postępować zgodnie z~następującymi krokami:
 
 \newpage
 
 \begin{enumerate}
-    \item Wybierz losowy wierzchołek startowy $x$ i dodaj go do rozwiązania.
+    \item Wybierz losowy wierzchołek startowy $x$ i~dodaj go~do~rozwiązania.
     \item Znajdź najbliższy nieodwiedzony wierzchołek $y$ względem punktu $x$.
-  	\item Dodaj wierzchołek $y$ do rozwiązania i ustaw wartość zmiennej $x$ na $y$.
-    \item Jeżeli długość rozwiązania jest mniejsza niż oczekiwana, wróć do punktu 2.
-    \item Wróć do wierzchołka początkowego.
+  	\item Dodaj wierzchołek $y$ do~rozwiązania i~ustaw wartość zmiennej $x$ na~$y$.
+    \item Jeżeli długość rozwiązania jest~mniejsza niż~oczekiwana, wróć do~punktu~2.
+    \item Wróć do~wierzchołka początkowego.
 \end{enumerate}
 
 \subsection{Instancje problemu}
 
-Problem komiwojażera jest bardzo popularny i możliwe jest znalezienie wielu gotowych instancji, których można użyć w celu przeprowadzenia badań. W naszych eksperymentach wybraliśmy 8 instancji z udostępnionego przez uniwersytet w Heidelberg zbioru. ~\cite{instances} Są to:
+Problem komiwojażera jest~bardzo popularny i~możliwe jest~znalezienie wielu gotowych instancji, których~można użyć w~celu przeprowadzenia badań. W~naszych eksperymentach wybraliśmy 9~instancji z~udostępnionego przez~uniwersytet w~Heidelberg zbioru.~\cite{instances} Są~to:
 
 \begin{enumerate}
     \item berlin52,
@@ -50,4 +50,4 @@ Problem komiwojażera jest bardzo popularny i możliwe jest znalezienie wielu go
 \end{enumerate}
 
 \noindent
-Przy doborze konkretnych instancji zależało nam na tym, aby nie były one zbyt duże (do ok. 200 miast), a także miały znalezione rozwiązania optymalne, były różnorodne oraz podane w formacie EUC\_2D, czyli za pomocą współrzędnych na dwuwymiarowej płaszczyźnie Euklidesowej.
+Przy doborze konkretnych instancji zależało nam~na~tym, aby~nie~były~one zbyt duże (do~ok.~200~miast), a~także miały znalezione rozwiązania optymalne, były~różnorodne oraz~podane w~formacie EUC\_2D, czyli za~pomocą współrzędnych na~dwuwymiarowej płaszczyźnie Euklidesowej.

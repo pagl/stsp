@@ -23,6 +23,10 @@ def save_figure(name, output_dir, format="pdf"):
     plt.savefig(os.path.join(output_dir, "{}.{}".format(name, format)), format=format)
 
 
+def save_data(data, name, output_dir, format="csv"):
+    data.to_csv(os.path.join(output_dir, "{}.{}".format(name, format)))
+
+
 def get_facet_grid(data):
     sns.set_context(context="paper", font_scale=1.7)
     sns.set_style("whitegrid")
@@ -42,18 +46,24 @@ def score_comparison(data, output_dir):
                                  order=order_all,
                                  palette=sns.color_palette("hls", 6))
     save_figure("score_comparison_bar_min", output_dir)
+    save_data(data[["algorithm", "instance", "final_score"]].groupby(["algorithm", "instance"]).min(),
+              "score_comparison_bar_min", output_dir)
 
     # Highest Score (Bar Plot)
     get_facet_grid(data_max).map(sns.barplot, "algorithm", "final_score",
                                  order=order_all_with_opt,
                                  palette=sns.color_palette("hls", 6))
     save_figure("score_comparison_bar_max", output_dir)
+    save_data(data[["algorithm", "instance", "final_score"]].groupby(["algorithm", "instance"]).max(),
+              "score_comparison_bar_max", output_dir)
 
     # Average Score (Bar Plot)
     get_facet_grid(data).map(sns.barplot, "algorithm", "final_score", ci="sd", capsize=.05,
                              order=order_all_with_opt,
                              palette=sns.color_palette("hls", 6))
     save_figure("score_comparison_bar_avg", output_dir)
+    save_data(data[["algorithm", "instance", "final_score"]].groupby(["algorithm", "instance"]).mean(),
+              "score_comparison_bar_avg", output_dir)
 
     # Score (Letter Value Plot)
     get_facet_grid(data).map(sns.lvplot, "algorithm", "final_score",
