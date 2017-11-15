@@ -1,13 +1,12 @@
 \documentclass{article} 
-\usepackage{polski} %moze wymagac dokonfigurowania latexa, ale jest lepszy niż standardowy babel'owy [polish] 
+\usepackage{polski} 
 \usepackage[utf8]{inputenc} 
 \usepackage[OT4]{fontenc} 
-\usepackage{graphicx,color} %include pdf's (and png's for raster graphics... avoid raster graphics!)
+\usepackage{graphicx,color}
 \usepackage{url}
 \usepackage{listings}
 \usepackage{enumerate}
-\usepackage[pdftex,hyperfootnotes=false,pdfborder={0 0 0}]{hyperref} %za wszystkimi pakietami; pdfborder nie wszedzie tak samo zaimplementowane bo specyfikacja nieprecyzyjna; pod miktex'em po prostu nie widac wtedy ramek
-
+\usepackage[pdftex,hyperfootnotes=false,pdfborder={0 0 0}]{hyperref}
 \input{_ustawienia.tex}
 
 \begin{document}
@@ -19,16 +18,15 @@
 Sprawozdanie zostało wykonane z wykorzystaniem szablonu dr hab. inż. Macieja Komosińskiego. \cite{MiOIB}
 
 \subsection*{Patryk Gliszczyński}
-PG zaimplementował algorytmy i przygotował środowisko badawcze, napisał skrypt do generowania wykresów.
+PG zaimplementował algorytmy lokalnego przeszukiwania, przygotował środowisko badawcze, napisał skrypt do automatycznego generowania wykresów, oraz opisał teoretyczną stronę tego zagadnienia.
 
 \subsection*{Mateusz Ledzianowski}
-ML zaimplementowała funkcję mierzącą czas, generującą permutację, przeprowadził eksperymenty i opisał je w sprawozdaniu.
+ML zaimplementował funkcję mierzącą czas, algorytm losowy i prostą heurystykę, przeprowadził eksperymenty na różnych instancjach problemu, oraz opisał wnioski i spostrzeżenia z przeprowadzonych badań.
 
 \clearpage
 
 \section{Symetryczny problem komiwojażera (STSP)}
 
-%krótki opis problemu, jego zastosowań i interpretacji, złożoności – do 20 linijek uzasadnienie wyboru instancji i ich nazwy
 \input{_opis_stsp} %ML
 
 \clearpage
