@@ -1,37 +1,42 @@
 \subsection{Opis problemu}
 
-Symetryczny problem komiwojażera modeluje sytuację znaną z rzeczywistego świata, w której osoba ma odwiedzić konkretne miejsca w dowolnej kolejności i wrócić do miejsca początkowego tak, aby pokonać jak najkrótszą drogę. Z tego typu zadaniem mierzą się przede wszystkim wszyscy dostawcy, listonosze, akwizytorzy. W symetrycznym problemie komiwojażera odległości pomiędzy dwoma miejscami są takie same w obie strony. Problem nie daje możliwości tworzenia dróg jednokierunkowych, a także budowana sieć dróg jest grafem pełnym.
+Problem komiwojażera modeluje sytuację znaną ze świata rzeczywistego, w której pewien obiekt stara się odwiedzić wszystkie punkty z danego zbioru punktów oraz wrócić do miejsca początkowego, w kolejności minimalizującej całkowity koszt podróży. Z tego typu zadaniem mierzą się między innymi wszelkiego rodzaju dostawcy usług transportowych, listonosze, czy akwizytorzy. W symetrycznym problemie komiwojażera koszt pomiędzy dowolnymi dwoma wierzchołkami w grafie połączeń jest identyczny w obydwie strony. W naszym problemie sieć połączeń pomiędzy poszczególnymi wierzchołkami opisana jest grafem pełnym, co oznacza że istnieje połączenie między każdą parą wierzchołków w grafie.
 
 \subsection{Złożoność}
 
-W~tak~postawionym problemie, istnieje różnych $\theta(n!)$ rozwiązań, gdzie~$n$ oznacza liczbę miejsc do~odwiedzenia. Miejsca możemy odwiedzać w~dowolnej kolejności, więc~jeśli zostaną one ponumerowane od~1~do~n, każda~permutacja n-elementowa może~reprezentować pełne rozwiązanie. Rozwiązanie w~postaci permutacji możemy odczytywać w~taki~sposób, że~z~miejsca na~pozycji $i$, przemieszczamy się do~miejsca na~pozycji $i+1$, pamiętając o~tym, żeby~z~miejsca na~pozycji $n$ wrócić do startowego o indeksie $1$. Przestrzeń rozwiązań jest więc bardzo duża i trudno jest przejrzeć je wszystkie. Jeśli bylibyśmy w stanie sprawdzać $1'000'000'000$ rozwiązań w czasie $1$ sekundy, rozwiązania dokładnego dla $n=16$, szukalibyśmy przez ok.~$6h$, a~znalezienie go~dla~$n=20$ zajęłoby $77$~lat.
+W tak postawionym problemie, istnieje $n!$  różnych rozwiązań, gdzie $n$ oznacza liczbę wierzchołków w grafie. Punkty możemy odwiedzać w dowolnej kolejności, zatem jeżeli zostaną one ponumerowane od 1 do n, to każda permutacja n-elementowa może reprezentować pełne rozwiązanie. Rozwiązanie w postaci permutacji możemy odczytywać w~taki~sposób, że~z~miejsca na~pozycji $i$, przemieszczamy się do~miejsca na~pozycji $i+1$, pamiętając o~tym, żeby~z~miejsca na~pozycji $n$ wrócić do punktu startowego. Przestrzeń rozwiązań jest bardzo duża, oraz kosztowna obliczeniowo przy chęci wyznaczenia każdej istniejącej permutacji. Jeśli bylibyśmy w stanie sprawdzać $1\ 000\ 000\ 000$ rozwiązań w czasie $1$ sekundy, rozwiązania dokładnego dla $n=16$, szukalibyśmy przez ok.~$6h$, a~znalezienie go~dla~$n=20$ zajęłoby $77$~lat.
 
 \subsection{Rozwiązanie losowe}
 
-Ponieważ rozwiązania można reprezentować w~postaci permutacji, da~się w~łatwy i~szybki sposób wygenerować losowe początkowe rozwiązanie dla~wielu innych algorytmów poprzez wygenerowanie losowej permutacji. Złożoność generowania permutacji to~$\theta(n)$, gdzie~$n$ jest~jej~długością. Aby~wygenerować losową permutację należy zastosować poniższą procedurę:
+Ponieważ rozwiązanie można reprezentować w postaci permutacji, możliwym jest wygenerowanie rozwiązania losowego poprzez przeprowadzenie losowej permutacji wierzchołków z rozwiązania początkowego. Złożoność obliczeniowa takiej operacji wynosi $\theta(n)$, gdzie $n$ jest długością rozwiązania początkowego. Aby wygenerować losową permutację należy zastosować poniższą procedurę:
 
 \begin{enumerate}
     \item Wypełnij tablicę liczbami od $1$ do $n$.
-    \item $i := n$.
-    \item Zamień element z pozycji $i-1$ z elementem na losowej wcześniejszej lub tej samej pozycji (od $0$ do $i-1$).
+    \item $i := n$. -- zainicjuj zmienną wskazującą na ostatni element rozwiązania.
+    \item $random := random(0,\ i - 1) $ -- wylosuj liczbę z zakresu od 0 do i - 1 włącznie.
+    \item Zamień element z pozycji $i-1$ z elementem na pozycji wskazywanej przez zmienną $random$.
     \item $i := i-1$.
-    \item Jeżeli $i>1$, wróć do kroku 2.
+    \item Jeżeli $i>1$, wróć do kroku 3.
 \end{enumerate}
+
 
 \subsection{Heurystyka}
 
-Dla problemu komiwojażera istnieje prosta heurystyka o złożoności $\theta(n^2)$, dająca zadowalające wyniki --- przeciętnie odległe od rozwiązania optymalnego o~$10-15\%$.~\cite{Heuristic} Polega ona na~wykonaniu poniższych kroków:
+Dla symetrycznego problemu komiwojażera możliwe jest znalezienie prostej heurystyki o złożoności $\theta(n^2)$ dającej satysfakcjonujące rezultaty, przeciętnie odległe od rozwiązania optymalnego o $10-15\%$.~\cite{Heuristic}. W celu wyznaczenia rozwiązania z wykorzystaniem algorytmu heurystycznego, należy postępować zgodnie z następującymi krokami:
+
+\newpage
 
 \begin{enumerate}
-    \item Wybierz losowe miasto początkowe.
-    \item Znajdź najbliższe nieodwiedzone miasto i udaj się tam.
-    \item Jeśli pozostały jeszcze jakieś nieodwiedzone miasta, idź do kroku 2.
-    \item Wróć do początkowego miasta.
+    \item Wybierz losowy wierzchołek startowy $x$ i dodaj go do rozwiązania.
+    \item Znajdź najbliższy nieodwiedzony wierzchołek $y$ względem punktu $x$.
+  	\item Dodaj wierzchołek $y$ do rozwiązania i ustaw wartość zmiennej $x$ na $y$.
+    \item Jeżeli długość rozwiązania jest mniejsza niż oczekiwana, wróć do punktu 2.
+    \item Wróć do wierzchołka początkowego.
 \end{enumerate}
 
 \subsection{Instancje problemu}
 
-Problem jest bardzo powszechny i istnieje wiele gotowych instancji, których można użyć w badaniach. Wybraliśmy 8 instancji z udostępnionego przez uniwersytet ,,Heidelberg'' zbioru.~\cite{instances} Są to:
+Problem komiwojażera jest bardzo popularny i możliwe jest znalezienie wielu gotowych instancji, których można użyć w celu przeprowadzenia badań. W naszych eksperymentach wybraliśmy 8 instancji z udostępnionego przez uniwersytet w Heidelberg zbioru. ~\cite{instances} Są to:
 
 \begin{enumerate}
     \item berlin52,
@@ -44,4 +49,5 @@ Problem jest bardzo powszechny i istnieje wiele gotowych instancji, których mo�
     \item tsp225.
 \end{enumerate}
 
-Przy doborze konkretnych instancji zależało nam na tym, aby nie były one zbyt duże (przeważnie do 200 miast), a także miały znalezione rozwiązania optymalne, były różnorodne oraz podane w formacie EUC\_2D, czyli za pomocą współrzędnych na dwuwymiarowej płaszczyźnie Euklidesowej.
+\noindent
+Przy doborze konkretnych instancji zależało nam na tym, aby nie były one zbyt duże (do ok. 200 miast), a także miały znalezione rozwiązania optymalne, były różnorodne oraz podane w formacie EUC\_2D, czyli za pomocą współrzędnych na dwuwymiarowej płaszczyźnie Euklidesowej.
