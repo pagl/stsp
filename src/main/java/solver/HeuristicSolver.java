@@ -36,7 +36,7 @@ public class HeuristicSolver extends Solver {
         this.visited.add(this.newSolution[0]);
         
         for (int node = 1; node < this.solution.length; node++) {
-            this.steps++;
+            this.nSolutions++;
             this.newSolution[node] = this.nextBestNode(this.data.getNeighbors(this.newSolution[node - 1]), 
                                                        this.visited);
             this.visited.add(this.newSolution[node]);

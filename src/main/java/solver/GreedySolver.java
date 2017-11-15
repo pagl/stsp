@@ -37,7 +37,7 @@ public class GreedySolver extends Solver {
         System.arraycopy(this.solution, 0, this.lastSolution, 0, this.solution.length);
             
         for (int[] currentSolution : this.optGenerator) {
-            this.steps++;
+            this.nSolutions++;
             if (this.data.evaluate(currentSolution) < initialScore) {
                 break;
             }

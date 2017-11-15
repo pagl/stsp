@@ -23,8 +23,8 @@ public abstract class Solver {
         public int[] solution;
         public float initialScore;
         public float score;
-        public int iterations;
         public int steps;
+        public int nSolutions;
 
         public Object calculateSimilarity(int[] otherSolution) {
             int similarEdges = 0;
@@ -45,7 +45,7 @@ public abstract class Solver {
 
     protected final Data data;
     protected final int[] solution;
-    protected int steps;
+    protected int nSolutions;
 
     public Solver(Data data) {
         this.data = data;
@@ -60,7 +60,7 @@ public abstract class Solver {
         return this.data.getOptimalTourEval();
     }
 
-    public Result resolve() {
+    public Result resolve(long stepLimit) {
         for (int i = 1; i <= this.data.getSize(); i++) {
             this.solution[i - 1] = i;
         }
@@ -68,14 +68,14 @@ public abstract class Solver {
 
         Result result = new Result();
         result.initialScore = this.data.evaluate(this.solution);
-        result.iterations = 0;
-        this.steps = 0;
+        result.steps = 0;
+        this.nSolutions = 0;
         do {
             result.solution = this.next();
-            result.iterations++;
-        } while (this.hasNext());
+            result.steps++;
+        } while (this.hasNext() && result.steps < stepLimit);
         result.score = this.data.evaluate(result.solution);
-        result.steps = this.steps;
+        result.nSolutions = this.nSolutions;
 
         return result;
     }

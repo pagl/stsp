@@ -3,6 +3,7 @@ package stsp;
 import data.Data;
 import solver.GreedySolver;
 import solver.HeuristicSolver;
+import solver.MultirandomSolver;
 import solver.RandomSolver;
 import solver.Solver;
 import solver.SteepestSolver;
@@ -24,6 +25,9 @@ public class Main {
             case "random":
                 solver = new RandomSolver(data);
                 break;
+            case "multirandom":
+                solver = new MultirandomSolver(data);
+                break;
             case "heuristic":
                 solver = new HeuristicSolver(data);
                 break;
@@ -38,7 +42,7 @@ public class Main {
         }
 
         Experiment experiment = new Experiment(solver, arguments.time,
-                arguments.minIterations, arguments.maxIterations, arguments.output);
+                arguments.minIterations, arguments.maxIterations, arguments.stepLimit, arguments.output);
         experiment.run();
     }
 }

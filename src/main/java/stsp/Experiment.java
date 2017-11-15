@@ -14,13 +14,15 @@ public class Experiment {
     private final long timeLimit;
     private final long iterMin;
     private final long iterMax;
+    private final long stepLimit;
     private final Logger logger;
 
-    public Experiment(Solver solver, long timeLimit, long iterMin, long iterMax, String logFileName) {
+    public Experiment(Solver solver, long timeLimit, long iterMin, long iterMax, long stepLimit, String logFileName) {
         this.solver = solver;
         this.timeLimit = timeLimit;
         this.iterMin = iterMin;
         this.iterMax = iterMax;
+        this.stepLimit = stepLimit;
         this.logger = new Logger(logFileName);
     }
 
@@ -31,15 +33,15 @@ public class Experiment {
 
         do {
             iterStartTime = System.nanoTime();
-            Solver.Result result = this.solver.resolve();
+            Solver.Result result = this.solver.resolve(stepLimit);
             currentTime = System.nanoTime();
             bestScoreSoFar = Math.min(bestScoreSoFar, result.score);
             logger.write(String.valueOf(iter++) + ",");
             logger.write(String.valueOf(result.initialScore) + ",");
             logger.write(String.valueOf(result.score) + ",");
             logger.write(String.valueOf(bestScoreSoFar) + ",");
-            logger.write(String.valueOf(result.iterations) + ",");
             logger.write(String.valueOf(result.steps) + ",");
+            logger.write(String.valueOf(result.nSolutions) + ",");
             logger.write(String.valueOf((currentTime - iterStartTime) / 1e6) + ",");
             logger.writeln(String.valueOf(result.calculateSimilarity(solver.getFullOptimalTour())));
         } while (iter < this.iterMin

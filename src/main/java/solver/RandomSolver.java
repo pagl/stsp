@@ -25,7 +25,7 @@ public class RandomSolver extends Solver {
     
     @Override
     protected int[] next() {
-        this.steps++;
+        this.nSolutions++;
         Utilities.shuffle(this.solution);
         return this.solution;
     }
