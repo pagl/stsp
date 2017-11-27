@@ -59,13 +59,17 @@ public abstract class Solver {
     public float getOptimalDistance() {
         return this.data.getOptimalTourEval();
     }
-
-    public Result resolve(long stepLimit) {
+    
+    public void initialize() {
         for (int i = 1; i <= this.data.getSize(); i++) {
             this.solution[i - 1] = i;
         }
         Utilities.shuffle(this.solution);
+    }
 
+    public Result resolve(long stepLimit) {
+        this.initialize();
+        
         Result result = new Result();
         result.initialScore = this.data.evaluate(this.solution);
         result.steps = 0;

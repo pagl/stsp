@@ -3,20 +3,19 @@ package utils;
 import java.util.Iterator;
 
 /**
- * 
+ *
  * @author Patryk Gliszczynski
  * @author Mateusz Ledzianowski
  * @param <Type>
  */
+public class OptGenerator<Type> implements Iterable<int[]> {
 
-public class OptGenerator <Type> implements Iterable<int[]> {    
     private final int[] array;
-    private int pointA, pointB;
+    private int lastA, lastB;
 
     public OptGenerator(int[] array) {
-       this.array = array;
+        this.array = array;
     }
-    
 
     @Override
     public Iterator<int[]> iterator() {
@@ -50,6 +49,8 @@ public class OptGenerator <Type> implements Iterable<int[]> {
                 }
                 // Utilities.swap(array, this.pointA, this.pointB);
                 Utilities.reverse(array, this.pointA, this.pointB);
+                lastA = this.pointA;
+                lastB = this.pointB;
                 return array;
             }
 
@@ -59,7 +60,17 @@ public class OptGenerator <Type> implements Iterable<int[]> {
             }
         };
         return it;
-    }    
-}
+    }
 
-    
+    public int getNeighbourSize() {
+        return array.length * (array.length - 1) / 2;
+    }
+
+    public int getLastA() {
+        return lastA;
+    }
+
+    public int getLastB() {
+        return lastB;
+    }
+}

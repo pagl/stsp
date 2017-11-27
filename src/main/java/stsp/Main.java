@@ -7,6 +7,7 @@ import solver.MultirandomSolver;
 import solver.RandomSolver;
 import solver.Solver;
 import solver.SteepestSolver;
+import solver.TabuSearchSolver;
 import utils.ArgParse;
 
 /**
@@ -36,6 +37,9 @@ public class Main {
                 break;
             case "steepest":
                 solver = new SteepestSolver(data);
+                break;
+            case "tabusearch":
+                solver = new TabuSearchSolver(data);
                 break;
             default:
                 throw new Exception("Unknown solver name.");
