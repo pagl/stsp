@@ -3,10 +3,12 @@
 \usepackage[utf8]{inputenc} 
 \usepackage[OT4]{fontenc} 
 \usepackage{graphicx,color}
+\usepackage{float}
 \usepackage{url}
 \usepackage{listings}
 \usepackage{enumerate}
 \usepackage[pdftex,hyperfootnotes=false,pdfborder={0 0 0}]{hyperref}
+\usepackage{csvsimple}
 \input{_ustawienia.tex}
 
 \begin{document}
@@ -24,8 +26,12 @@ Sprawozdanie zostało wykonane z wykorzystaniem szablonu dr hab. inż. Macieja K
 \subsection*{Patryk Gliszczyński}
 PG~zaimplementował algorytmy lokalnego przeszukiwania, przygotował środowisko badawcze, napisał skrypt do~automatycznego generowania wykresów, oraz~opisał teoretyczną stronę tego~zagadnienia.
 
+PG~zaimplementował i~opisał algorytm symulowanego wyżarzania.
+
 \subsection*{Mateusz Ledzianowski}
 ML~zaimplementował funkcję mierzącą czas, algorytm losowy i~prostą heurystykę, przeprowadził eksperymenty na~różnych instancjach problemu, oraz~opisał wnioski i~spostrzeżenia z~przeprowadzonych badań.
+
+ML~zaimplementował i~opisał algorytm przeszukiwania tabu w wersji master list.
 
 \clearpage
 
@@ -41,6 +47,14 @@ ML~zaimplementował funkcję mierzącą czas, algorytm losowy i~prostą heurysty
 \input{_optymalizacja_lokalna} %ML
 
 \clearpage
+
+\section{Symulowane wyżarzanie}
+
+\input{_symulowane_wyzarzanie} %PG
+
+\section{Przeszukiwanie tabu}
+
+\input{_przeszukiwanie_tabu} %ML
 
 \section{Eksperymenty}
 

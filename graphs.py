@@ -11,12 +11,16 @@ HEURISTIC = "heuristic"
 GREEDY = "greedy"
 STEEPEST = "steepest"
 OPTIMAL = "optimal"
+SIMULATEDANNEALING = "Simulatedannealing"
+TABUSEARCH = "tabusearch"
 
-order_all_with_opt = [RANDOM, HEURISTIC, GREEDY, STEEPEST, OPTIMAL]
-order_all = [RANDOM, HEURISTIC, GREEDY, STEEPEST]
-order_without_random_with_opt = [HEURISTIC, GREEDY, STEEPEST, OPTIMAL]
+order_all_with_opt = [RANDOM, HEURISTIC, GREEDY, STEEPEST, TABUSEARCH, OPTIMAL]
+order_all = [RANDOM, HEURISTIC, GREEDY, STEEPEST, TABUSEARCH]
+order_without_random_with_opt = [HEURISTIC, GREEDY, STEEPEST, TABUSEARCH, OPTIMAL]
 order_without_heuristic = [RANDOM, GREEDY, STEEPEST]
+order_ls_sa_ts = [GREEDY, STEEPEST, TABUSEARCH]
 order_ls = [GREEDY, STEEPEST]
+order_sa_ts = [TABUSEARCH]
 
 
 def save_figure(name, output_dir, format="pdf"):
@@ -43,7 +47,7 @@ def score_comparison(data, output_dir):
 
     # Lowest Score (Bar Plot)
     get_facet_grid(data_min).map(sns.barplot, "algorithm", "final_score",
-                                 order=order_all,
+                                 order=order_all_with_opt,
                                  palette=sns.color_palette("hls", 6))
     save_figure("score_comparison_bar_min", output_dir)
     save_data(data[["algorithm", "instance", "final_score"]].groupby(["algorithm", "instance"]).min(),
@@ -95,25 +99,25 @@ def time_comparison(data, output_dir):
 def steps_comparison(data, output_dir):
     # Average Steps (Bar Plot)
     get_facet_grid(data).map(sns.barplot, "algorithm", "steps", ci="sd", capsize=.05,
-                             order=order_ls,
+                             order=order_ls_sa_ts,
                              palette=sns.color_palette("hls", 3))
     save_figure("steps_comparison_bar_avg", output_dir)
 
     # Steps (Violin Plot)
     get_facet_grid(data).map(sns.violinplot, "algorithm", "steps",
-                             order=order_ls,
+                             order=order_ls_sa_ts,
                              palette=sns.color_palette("hls", 3))
     save_figure("steps_comparison_violin", output_dir)
 
     # Average Iterations (Bar Plot)
     get_facet_grid(data).map(sns.barplot, "algorithm", "iterations", ci="sd", capsize=.05,
-                             order=order_ls,
+                             order=order_ls_sa_ts,
                              palette=sns.color_palette("hls", 3))
     save_figure("iterations_comparison_bar_avg", output_dir)
 
     # Iterations (Violin Plot)
     get_facet_grid(data).map(sns.violinplot, "algorithm", "iterations",
-                             order=order_ls,
+                             order=order_ls_sa_ts,
                              palette=sns.color_palette("hls", 3))
     save_figure("iterations_comparison_violin", output_dir)
 
