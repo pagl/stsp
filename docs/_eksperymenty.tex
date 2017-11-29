@@ -2,7 +2,7 @@
 
 Z~rys.~\ref{fig:avg} wynika, że~dla~każdej instancji problemu, heurystyka i~algorytmy przeszukiwania lokalnego osiągają podobne wyniki, które są~kilkukrotnie lepsze od~rozwiązania losowego, z~którego startują zarówno Greedy, jak~i~Steepest. Algorytmy Greedy i~Steepest dają podobne rezultaty --- różnią się nieznacznie dla~różnych instancji i~nie~ma~tendencji co~do~tego, który ogólnie działa lepiej. Można za~to~zaobserwować, że~oba~algorytmy przeszukiwania lokalnego są~lepsze niż~heurystyka.
 
-\begin{figure}
+\begin{figure}[H]
 \begin{center}
 \includegraphics[width=1.0\textwidth]{graphs/score_comparison_bar_avg.pdf}
 \end{center}
@@ -10,7 +10,21 @@ Z~rys.~\ref{fig:avg} wynika, że~dla~każdej instancji problemu, heurystyka i~al
 \label{fig:avg}
 \end{figure}
 
-\begin{figure}
+%\begin{table}[H]
+%\centering
+%\begin{tabular}{ccc}%
+%\hline
+%\bfseries algorithm & \bfseries instance & \bfseries finalscore% specify table head
+%\\ \hline
+%\csvreader[head to column names]{graphs/score_comparison_bar_avg.csv}{}% use head of csv as column names
+%{\\ \algorithm & \instance & \finalscore}% specify your coloumns here
+%\\ \hline
+%\end{tabular}
+%\caption{Porównanie średnich rozwiązań na~różnych instancjach.}
+%\label{tab:avg}
+%\end{table}
+
+\begin{figure}[H]
 \begin{center}
 \includegraphics[width=1.0\textwidth]{graphs/score_comparison_bar_min.pdf}
 \end{center}
@@ -18,7 +32,7 @@ Z~rys.~\ref{fig:avg} wynika, że~dla~każdej instancji problemu, heurystyka i~al
 \label{fig:best}
 \end{figure}
 
-\begin{figure}
+\begin{figure}[H]
 \begin{center}
 \includegraphics[width=1.0\textwidth]{graphs/score_comparison_bar_max.pdf}
 \end{center}
@@ -26,7 +40,7 @@ Z~rys.~\ref{fig:avg} wynika, że~dla~każdej instancji problemu, heurystyka i~al
 \label{fig:worst}
 \end{figure}
 
-\begin{figure}
+\begin{figure}[H]
 \begin{center}
 \includegraphics[width=1.0\textwidth]{graphs/score_comparison_violin.pdf}
 \end{center}
@@ -38,7 +52,7 @@ Z~rys.~\ref{fig:avg} wynika, że~dla~każdej instancji problemu, heurystyka i~al
 
 Algorytm losowy jest~zdecydowanie najszybszy, ponieważ sprawdza tylko jedno rozwiązanie. Podobnie heurystyka, jednak wyznaczenie przez nią~rozwiązania zajmuje trochę więcej czasu. Greedy i~Steepest przeszukują przestrzeń rozwiązań, dopóki nie~mogą już~bardziej poprawić wyniku, przez co~trwają zdecydowanie najdłużej. Przeważnie obliczenia Steepesta zajmują więcej czasu, niż~wykonanie algorytmu Greedy. Na~rys.~\ref{fig:time} można~też~zauważyć, że~pojedyncze wykonania trwają znacznie dłużej od~pozostałych --- szczególnie jest~to~widoczne przy~instancji berlin52.
 
-\begin{figure}
+\begin{figure}[H]
 \begin{center}
 \includegraphics[width=1.0\textwidth]{graphs/time_comparison_letval.pdf}
 \end{center}
@@ -58,7 +72,7 @@ Z~wykresów~\ref{fig:cost} i~\ref{fig:quality} można by~wyciągnąć wniosek, �
 
 Na~wykresie kosztu widać również, że~Greedy jest~kosztowniejszy od~Steepesta, ponieważ daje zbliżone rozwiązania w~dłuższym czasie.
 
-\begin{figure}
+\begin{figure}[H]
 \begin{center}
 \includegraphics[width=1.0\textwidth]{graphs/cost_comparison_letval.pdf}
 \end{center}
@@ -66,7 +80,7 @@ Na~wykresie kosztu widać również, że~Greedy jest~kosztowniejszy od~Steepesta
 \label{fig:cost}
 \end{figure}
 
-\begin{figure}
+\begin{figure}[H]
 \begin{center}
 \includegraphics[width=1.0\textwidth]{graphs/quality_comparison_letval.pdf}
 \end{center}
@@ -78,7 +92,7 @@ Na~wykresie kosztu widać również, że~Greedy jest~kosztowniejszy od~Steepesta
 
 Wykres~\ref{fig:steps} przedstawia liczbę kroków wykonanych przez algorytmy lokalnego przeszukiwania. Widać, że~Greedy wykonuje ich kilkakrotnie więcej niż~Steepest, a~także, że~liczba wykonanych kroków przez ten~algorytm jest~dużo bardziej zróżnicowana, w~zależności od~przypadku startowego. Jest~to~spowodowane tym, że~algorytm Steepest we~wcześniejszym kroku osiąga lokalnie najlepsze rozwiązanie, ponieważ za~każdym razem wybiera to, które~najbardziej poprawia wynik z~całego sąsiedztwa.
 
-\begin{figure}
+\begin{figure}[H]
 \begin{center}
 \includegraphics[width=1.0\textwidth]{graphs/iterations_comparison_violin.pdf}
 \end{center}
@@ -90,7 +104,7 @@ Wykres~\ref{fig:steps} przedstawia liczbę kroków wykonanych przez algorytmy lo
 
 Na~wykresie \ref{fig:nsol} jest~przedstawiona liczba rozwiązań przeszukiwanych przez~oba rozważane algorytmy lokalnego przeszukiwania. Można na~nim~zauważyć, że~średnio Steepest przeszukuje większą przestrzeń, choć~zdarzają się wykonania algorytmu Greedy, które~sprawdzają większą liczbę rozwiązań. Jest to~o~tyle ciekawe, że~Steepest wykonuje mniej kroków, niż~Greedy, a~i~tak aby~je~wykonać, przegląda więcej rozwiązań. Co~ciekawe, ta~tendencja jest~odmienna dla~największej instancji, podobnie~też, czas działania algorytmu Greedy dla~niej jest~większy od~Steepesta.
 
-\begin{figure}
+\begin{figure}[H]
 \begin{center}
 \includegraphics[width=1.0\textwidth]{graphs/steps_comparison_violin.pdf}
 \end{center}
@@ -104,7 +118,7 @@ Na~wykresie \ref{fig:nsol} jest~przedstawiona liczba rozwiązań przeszukiwanych
 
 Badając zależność między rozwiązaniem początkowym, a~końcowym, nie~udało nam się zaobserwować związku na~wykresie punktowym \ref{fig:diff_point}. Punkty są~bardzo rozrzucone i~nie~daje się ich~odpowiednio pogrupować. Na~wykresie skrzypcowym~\ref{fig:diff} zostały przedstawione rozwiązania początkowe i~końcowe dla~obu~algorytmów. Widać, że~są~wyraźnie od~siebie oddalone i~zgrupowane w~osobne chmury. Można zatem przypuszczać, że~jakość rozwiązania końcowego nie~zależy od~jakości rozwiązania początkowego.
 
-\begin{figure}
+\begin{figure}[H]
 \begin{center}
 \includegraphics[width=1.0\textwidth]{graphs/init_vs_final_score_point.pdf}
 \end{center}
@@ -112,7 +126,7 @@ Badając zależność między rozwiązaniem początkowym, a~końcowym, nie~udał
 \label{fig:diff_point}
 \end{figure}
 
-\begin{figure}
+\begin{figure}[H]
 \begin{center}
 \includegraphics[width=1.0\textwidth]{graphs/init_vs_final_score_violin.pdf}
 \end{center}
@@ -124,7 +138,7 @@ Badając zależność między rozwiązaniem początkowym, a~końcowym, nie~udał
 
 Wykresy~\ref{fig:more_berlin} i~\ref{fig:more_eil} przedstawiają wartość najlepszego znalezionego rozwiązania po~i-tej iteracji. Jak~widać, poprawia się ona~co~pewien czas. Im~rozwiązanie jest lepsze, tym~ten~czas jest~dłuższy. Im~więcej razy algorytm będzie uruchamiany z~różnych rozwiązań początkowych, tym~istnieje większa szansa, że~osiągnie on~lepszy wynik, więc~warto powtarzać uruchomienia dla~różnych rozwiązań początkowych, aby~pełniej przeszukać przestrzeń wszystkich rozwiązań.
 
-\begin{figure}
+\begin{figure}[H]
 \begin{center}
 \includegraphics[width=1.0\textwidth]{graphs/multi_start_scoreberlin52.pdf}
 \end{center}
@@ -132,7 +146,7 @@ Wykresy~\ref{fig:more_berlin} i~\ref{fig:more_eil} przedstawiają wartość najl
 \label{fig:more_berlin}
 \end{figure}
 
-\begin{figure}
+\begin{figure}[H]
 \begin{center}
 \includegraphics[width=1.0\textwidth]{graphs/multi_start_scoreeil51.pdf}
 \end{center}
@@ -152,7 +166,7 @@ Na~rysunku~\ref{fig:sim} można zaobserwować podobieństwo rozwiązań znajdowa
 
 Bardzo mocno wyróżnia się chmura rozwiązań losowych --- jakość rozwiązań jest~bardzo różnorodna, ale~wszystkie są~bardzo mało podobne do~rozwiązania optymalnego (poniżej 10\%, a~im~więcej miast w~instancji, tym~mniej podobne).
 
-\begin{figure}
+\begin{figure}[H]
 \begin{center}
 \includegraphics[width=1.0\textwidth]{graphs/similarity_comparision.pdf}
 \end{center}

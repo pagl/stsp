@@ -39,19 +39,20 @@ public class TabuSearchSolver extends Solver {
         this.rand = new Random();
         this.optGenerator = new OptGenerator(solution);
         this.bestSolution = new int[this.data.getSize()];
-        int possibleMovesSize = (int) this.optGenerator.getNeighbourSize() / 100;
+        int possibleMovesSize = (int) data.getSize() / 10;
         if (possibleMovesSize == 0) {
             possibleMovesSize = 1;
         }
         this.possibleMoves = new Move[possibleMovesSize];
-        this.stopLimit = 10/* * this.optGenerator.getNeighbourSize()*/;
+        this.stopLimit = 10 * data.getSize();
         this.moveComparator = new MoveComparator();
     }
-    
+
     @Override
     public void initialize() {
         super.initialize();
-        this.bestSolutionValue = Float.MAX_VALUE;
+        System.arraycopy(this.solution, 0, this.bestSolution, 0, this.solution.length);
+        this.bestSolutionValue = data.evaluate(solution);
         this.possibleMovesCounter = 0;
         this.lastWorstValue = Float.MAX_VALUE;
         this.iterationsWithoutProgress = 0;
@@ -103,7 +104,9 @@ public class TabuSearchSolver extends Solver {
             } else if (currentMove.getValue()
                     < possibleMoves[possibleMovesCounter - 1].getValue()) {
                 possibleMoves[possibleMovesCounter - 1] = currentMove;
-                updateValues();
+                for (int i = possibleMovesCounter - 2; i >= 0 && possibleMoves[i].getValue() > currentMove.getValue(); --i) {
+                    Utilities.swap(possibleMoves, i, i + 1);
+                }
                 lastWorstValue = possibleMoves[possibleMovesCounter - 1].getValue();
             }
         }
