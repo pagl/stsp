@@ -11,16 +11,16 @@ HEURISTIC = "heuristic"
 GREEDY = "greedy"
 STEEPEST = "steepest"
 OPTIMAL = "optimal"
-SIMULATEDANNEALING = "Simulatedannealing"
+ANNEALING = "annealing"
 TABUSEARCH = "tabusearch"
 
-order_all_with_opt = [RANDOM, HEURISTIC, GREEDY, STEEPEST, TABUSEARCH, OPTIMAL]
-order_all = [RANDOM, HEURISTIC, GREEDY, STEEPEST, TABUSEARCH]
-order_without_random_with_opt = [HEURISTIC, GREEDY, STEEPEST, TABUSEARCH, OPTIMAL]
+order_all_with_opt = [RANDOM, HEURISTIC, GREEDY, STEEPEST, TABUSEARCH, ANNEALING, OPTIMAL]
+order_all = [RANDOM, HEURISTIC, GREEDY, STEEPEST, TABUSEARCH, ANNEALING]
+order_without_random_with_opt = [HEURISTIC, GREEDY, STEEPEST, TABUSEARCH, , ANNEALING, OPTIMAL]
 order_without_heuristic = [RANDOM, GREEDY, STEEPEST]
-order_ls_sa_ts = [GREEDY, STEEPEST, TABUSEARCH]
+order_ls_sa_ts = [GREEDY, STEEPEST, TABUSEARCH, ANNEALING]
 order_ls = [GREEDY, STEEPEST]
-order_sa_ts = [TABUSEARCH]
+order_sa_ts = [TABUSEARCH, ANNEALING]
 
 
 def save_figure(name, output_dir, format="pdf"):

@@ -35,7 +35,7 @@ AGG_DATA_FIELDS = ["algorithm", "instance", "run_id", "init_score",
                    "final_score", "best_so_far", "iterations",
                    "steps", "run_time", "similarity", "quality", "cost"]
 
-ALGORITHMS = ["random", "heuristic", "greedy", "steepest", "tabusearch"]
+ALGORITHMS = ["random", "heuristic", "greedy", "steepest", "tabusearch", "annealing"]
 EXPERIMENT_MAX_TIME = 5000
 EXPERIMENT_MIN_ITER = 10
 EXPERIMENT_MAX_ITER = 400
