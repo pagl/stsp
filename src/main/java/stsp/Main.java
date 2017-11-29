@@ -5,6 +5,7 @@ import solver.GreedySolver;
 import solver.HeuristicSolver;
 import solver.MultirandomSolver;
 import solver.RandomSolver;
+import solver.SimulatedAnnealingSolver;
 import solver.Solver;
 import solver.SteepestSolver;
 import solver.TabuSearchSolver;
@@ -40,6 +41,9 @@ public class Main {
                 break;
             case "tabusearch":
                 solver = new TabuSearchSolver(data);
+                break;
+            case "annealing":
+                solver = new SimulatedAnnealingSolver(data);
                 break;
             default:
                 throw new Exception("Unknown solver name.");

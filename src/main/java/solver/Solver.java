@@ -60,7 +60,7 @@ public abstract class Solver {
         return this.data.getOptimalTourEval();
     }
     
-    public void initialize() {
+    protected void initialize() {
         for (int i = 1; i <= this.data.getSize(); i++) {
             this.solution[i - 1] = i;
         }
