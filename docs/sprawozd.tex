@@ -3,12 +3,17 @@
 \usepackage[utf8]{inputenc} 
 \usepackage[OT4]{fontenc} 
 \usepackage{graphicx,color}
-\usepackage{float}
-\usepackage{url}
-\usepackage{listings}
 \usepackage{enumerate}
-\usepackage[pdftex,hyperfootnotes=false,pdfborder={0 0 0}]{hyperref}
 \usepackage{csvsimple}
+\usepackage{listings}
+\usepackage{caption}
+\usepackage{float}
+\usepackage{color}
+\usepackage{url}
+\usepackage[pdftex,hyperfootnotes=false,pdfborder={0 0 0}]{hyperref}
+
+\definecolor{part2}{rgb}{0.1, 0.1, 0.8}
+
 \input{_ustawienia.tex}
 
 \begin{document}
@@ -47,14 +52,18 @@ ML~zaimplementował i~opisał algorytm przeszukiwania tabu w wersji master list.
 \input{_optymalizacja_lokalna} %ML
 
 \clearpage
-
+{\color{part2}
 \section{Symulowane wyżarzanie}
 
 \input{_symulowane_wyzarzanie} %PG
 
+\clearpage
+
 \section{Przeszukiwanie tabu}
 
 \input{_przeszukiwanie_tabu} %ML
+}
+\clearpage
 
 \section{Eksperymenty}
 

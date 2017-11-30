@@ -2,18 +2,44 @@
 
 Tabu Search jest drugim algorytmem optymalizacyjnym przedstawionym w sprawozdaniu, który pozwala na wychodzenie z optimów lokalnych poprzez dopuszczenie ruchów pogarszających rozwiązanie. Istnieją dwie popularne wersje tego rozwiązania --- z listą tabu, czyli zakazanych ruchów oraz z elitarną listą kandydatów. Na potrzeby eksperymentu zdecydowaliśmy się zaimplementować tę drugą wersję.
 
+Algorytm Tabu Search jest można opisać w następujący sposób\cite{TS}:
+
+\begin{algorithm}[caption={Integer division.}, label={alg1}]
+procedure PRZESZUKIWANIE TABU
+begin
+  INICJALIZUJ(xstart, xbest, T)
+  x := xstart
+  repeat
+    GENERUJ(V $\in$ N(x))
+    WYBIERZ(x0) //najlepsze f w V + aspiracja
+    UAKTUALNIJ LISTE TABU(T)
+    if f (x0) $\le$ f(xbest) then xbest := x0
+    x := x0
+  until WARUNEK STOPU
+end
+\end{algorithm}
+
+Po zainicjalizowaniu parametrów początkowych, należy powtarzać aż do osiągnięcia warunku stopu, którym w naszym rozwiązaniu jest określona liczba iteracji bez poprawy rozwiązania, kolejne kroki: najpierw należy ustalić listę kandydatów na ruch, następnie wybrać z niej ten, który prowadzi do najlepszego rozwiązania, usunąć wybrany krok z listy kandydatów, aby go nie powtórzyć w przyszłości, na końcu uaktualnić najlepsze znalezione dotychczas rozwiązanie, jeśli aktualne jest lepsze od dotychczas najlepszego.
+
+\subsection{Elitarna lista kandydatów}
+
+W naszym rozwiązaniu postanowiliśmy zastosować elitarną listę kandydatów. Polega ona na tym, że w momencie, kiedy dotychczas posiadana lista kandydatów jest niewystarczająca, co może się zdarzyć z dwóch powodów --- jest pusta lub najlepszy kandydat na liście jest gorszy od najsłabszego kandydata w momencie generowania tej listy, należy stworzyć nową listę kandydatów.
+
+Aby stworzyć nową listę kandydatów, należy przejrzeć całe sąsiedztwo aktualnego rozwiązania i wybrać spośród sąsiadów określoną listę najlepszych. Ruchy, które prowadzą do ich osiągnięcia tworzą nową elitarną listę kandydatów.
+
+W następnych krokach algorytmu lista ta jest utrzymywana i sprawdza się tylko tych sąsiadów aktualnego rozwiązania, do których prowadzą ruchy z listy i wybiera się spośród nich najlepszy. Następnie ruch ten jest z listy usuwany, aby nie został powtórzony w przyszłości, aż do czasu wygenerowania nowej elitarnej listy kandydatów.
+
+Dzięki takiemu rozwiązaniu, można znacznie ograniczyć liczbę przeszukiwanych sąsiadów każdego rozwiązania i wychodzić z optimów lokalnych --- gdy nie ma rozwiązania, które poprawia wynik, też tworzy się listy kandydatów, które pogarszają go w najmniejszym stopniu.
+
 \subsection{Cechy algorytmu}
 
 Jedną z głównych cech algorytmu i zarazem przyczyn jego powstania jest dopuszczenie wychodzenia z maksimów lokalnych. Algorytm ten pozwala także na ograniczenie się do przeszukiwania jedynie części sąsiadów, zamiast całego ich zbioru, co znacznie przyspiesza obliczenia. Jednak aby możliwe było pokonanie słabości algorytmów optymalizacji lokalnej, przeszukiwanie tabu naraża się na wpadanie w cykle. Trzeba też uważać, aby nie ograniczyć za bardzo jego ruchów.
 
-\subsection{Elitarna lista kandydatów}
-
-...
-
 \subsection{Parametry}
 
-...
+Nasza implementacja tabu search ma zasadniczo dwa główne parametry --- wielkość elitarnej listy kandydatów $k$ i liczba iteracji bez poprawy najlepszego rozwiązania do zakończenia algorytmu $P \cdot L$.
+Początkowo wyszliśmy od parametrów $k = sizeofinstance() / 10$ i $P \cdot L = 10 \cdot sizeofinstance()$. Próbowaliśmy je ręcznie zmieniać i konfigurować, jednak nie poprawiało to znacząco wyników. Zauważyliśmy jedynie, że zmniejszając $k$ lub $L \cdot P$, algorytm szybciej się kończył, często jednak z gorszym rezultatem.
 
 \subsection{Podsumowanie}
 
-...
+Algorytm przeszukiwania Tabu pozwala przezwyciężyć słabości algorytmów przeszukiwania lokalnego, poprzez wychodzenie z maksimów lokalnych i zapamiętywania dotychczasowego najlepszego rozwiązania. Ponadto w czasie swego działania sprawdza on dużo więcej rozwiązań, jednocześnie działając dłużej. Szybciej jednak podejmuje decyzję o wyborze następnego rozwiązania niż algorytm steepest, ponieważ nie przeszukuje całego sąsiedztwa.
