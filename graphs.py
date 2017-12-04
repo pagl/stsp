@@ -154,7 +154,9 @@ def init_vs_final_score(data, output_dir):
 
     grid = get_facet_grid(data)
     grid.map(sns.pointplot, "init_score", "final_score", "algorithm",
-             hue_order=order_ls, join=False)
+             hue_order=order_ls, join=False, markers="+")
+    for ax in grid.axes.flat:
+        ax.xaxis.set_major_formatter(plt.NullFormatter())
     save_figure("init_vs_final_score_point", output_dir)
 
     grid = get_facet_grid(data)
