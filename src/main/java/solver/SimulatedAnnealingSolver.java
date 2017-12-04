@@ -38,19 +38,20 @@ public class SimulatedAnnealingSolver extends Solver {
     
     @Override
     protected int[] next() {        
-        System.arraycopy(this.solution, 0, this.currSolution, 0, this.solution.length);
         pointA = rand.nextInt(this.data.getSize());
-        
         do {
             pointB = rand.nextInt(this.data.getSize());
         } while(pointA == pointB);
+        
+        System.arraycopy(this.solution, 0, this.currSolution, 0, this.solution.length);
         Utilities.reverse(this.currSolution, Math.min(pointA, pointB), Math.max(pointA, pointB));
-        this.currScore = this.data.evaluate(this.currSolution);
-                
+        
+        this.currScore = this.data.evaluate(this.currSolution);        
         if (this.acceptanceProbability() > rand.nextDouble()) {         
             System.arraycopy(this.currSolution, 0, this.solution, 0, this.solution.length);
             this.prevScore = this.currScore;
         }
+        
         this.nSolutions++;
         if (++this.iteration == this.maxIterations) {
            this.iteration = 0;

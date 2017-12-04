@@ -2,13 +2,12 @@ package solver;
 
 import data.Data;
 import utils.Utilities;
-import java.util.Random;
 
 /**
  * This class implements an algorithm finding a random solution to the
  * Symmetric Traveling Salesman problem.
  * 
- * It picks a random permutation of nodes.
+ * It repeatedly picks a random permutation, and returns the best found.
  * 
  * @author Patryk Gliszczynski
  * @author Mateusz Ledzianowski
@@ -16,18 +15,30 @@ import java.util.Random;
 
 public class RandomSolver extends Solver {
     
-    private final Random rand;
+    private float currScore, bestScore;
+    private final int[] bestSolution;
+    
        
     public RandomSolver(Data data) {
         super(data);
-        this.rand = new Random();
+        this.bestSolution = new int[this.data.getSize()];
     }
     
     @Override
     protected int[] next() {
-        this.nSolutions++;
-        Utilities.shuffle(this.solution);
-        return this.solution;
+        this.bestScore = Float.MAX_VALUE;
+        
+        for (int x = 0; x < 1e6; x++) {
+            Utilities.shuffle(this.solution);
+            
+            currScore = this.data.evaluate(this.solution);
+            if (currScore < this.bestScore) {
+                this.bestScore = currScore;
+                System.arraycopy(this.solution, 0, this.bestSolution, 0, this.solution.length);
+            }    
+            this.nSolutions++;
+        }
+        return this.bestSolution;
     }
     
     @Override
