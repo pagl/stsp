@@ -4,7 +4,7 @@ Problem komiwojażera modeluje sytuację znaną ze świata rzeczywistego, w któ
 
 \subsection{Złożoność}
 
-W~tak postawionym problemie, istnieje $n!$~różnych rozwiązań, gdzie~$n$ oznacza liczbę wierzchołków w~grafie. Punkty możemy odwiedzać w~dowolnej kolejności, zatem jeżeli zostaną one ponumerowane od~1 do~n, to~każda permutacja n-elementowa może~reprezentować pełne rozwiązanie. Rozwiązanie w~postaci permutacji możemy odczytywać w~taki~sposób, że~z~miejsca na~pozycji $i$, przemieszczamy się do~miejsca na~pozycji $i+1$, pamiętając o~tym, żeby~z~miejsca na~pozycji $n$ wrócić do~punktu startowego. Przestrzeń rozwiązań jest bardzo duża, oraz~kosztowna obliczeniowo przy~chęci wyznaczenia każdej istniejącej permutacji. Jeśli bylibyśmy w~stanie sprawdzać $1\ 000\ 000\ 000$ rozwiązań w~czasie $1$ sekundy, rozwiązania dokładnego dla~$n=16$, szukalibyśmy przez ok.~$6h$, a~znalezienie go~dla~$n=20$ zajęłoby $77$~lat.
+W~tak postawionym problemie istnieje $n!$~różnych rozwiązań, gdzie~$n$ oznacza liczbę wierzchołków w~grafie. Punkty możemy odwiedzać w~dowolnej kolejności, zatem jeżeli zostaną one ponumerowane od~$1$ do~$n$, to~każda permutacja $n$-elementowa może~reprezentować pełne rozwiązanie. Rozwiązanie w~postaci permutacji możemy odczytywać w~taki~sposób, że~z~miejsca na~pozycji $i$, przemieszczamy się do~miejsca na~pozycji $i+1$, pamiętając o~tym, żeby~z~miejsca na~pozycji $n$ wrócić do~punktu startowego. Przestrzeń rozwiązań jest bardzo duża, oraz~kosztowna obliczeniowo przy~chęci wyznaczenia każdej istniejącej permutacji. Jeśli bylibyśmy w~stanie sprawdzać $1\ 000\ 000\ 000$ rozwiązań w~czasie $1$ sekundy, rozwiązania dokładnego dla~$n=16$, szukalibyśmy przez ok.~$6$h, a~znalezienie go~dla~$n=20$ zajęłoby $77$~lat.
 
 \subsection{Rozwiązanie losowe}
 
@@ -13,16 +13,17 @@ Ponieważ rozwiązanie można reprezentować w~postaci permutacji, możliwym jes
 \begin{enumerate}
     \item Wypełnij tablicę liczbami od $1$ do $n$.
     \item $i := n$. -- zainicjuj zmienną wskazującą na ostatni element rozwiązania.
-    \item $random := random(0,\ i - 1) $ -- wylosuj liczbę z zakresu od 0 do i - 1 włącznie.
+    \item $random := random(0,\ i - 1) $ -- wylosuj liczbę z zakresu od $0$ do $i - 1$ włącznie.
     \item Zamień element z pozycji $i-1$ z elementem na pozycji wskazywanej przez zmienną $random$.
     \item $i := i-1$.
     \item Jeżeli $i>1$, wróć do kroku 3.
 \end{enumerate}
 
+Aby algorytmowi losowemu dać większe szanse na znalezienie lepszego rozwiązania, powtarzamy go $1\ 000\ 000$ razy i zwraca on najlepsze spośród znalezionych rozwiązań.
 
 \subsection{Heurystyka}
 
-Dla~symetrycznego problemu komiwojażera możliwe jest~znalezienie prostej heurystyki o~złożoności $\theta(n^2)$ dającej satysfakcjonujące rezultaty, przeciętnie odległe od~rozwiązania optymalnego o~$10-15\%$.~\cite{Heuristic}. W~celu wyznaczenia rozwiązania z~wykorzystaniem algorytmu heurystycznego, należy postępować zgodnie z~następującymi krokami:
+Dla~symetrycznego problemu komiwojażera możliwe jest~znalezienie prostej heurystyki o~złożoności $\theta(n^2)$ dającej satysfakcjonujące rezultaty, przeciętnie odległe od~rozwiązania optymalnego o~$10-15\%$~\cite{Heuristic}. W~celu wyznaczenia rozwiązania z~wykorzystaniem algorytmu heurystycznego, należy postępować zgodnie z~następującymi krokami:
 
 \newpage
 
@@ -36,16 +37,17 @@ Dla~symetrycznego problemu komiwojażera możliwe jest~znalezienie prostej heury
 
 \subsection{Instancje problemu}
 
-Problem komiwojażera jest~bardzo popularny i~możliwe jest~znalezienie wielu gotowych instancji, których~można użyć w~celu przeprowadzenia badań. W~naszych eksperymentach wybraliśmy 9~instancji z~udostępnionego przez~uniwersytet w~Heidelberg zbioru.~\cite{instances} Są~to:
+Problem komiwojażera jest~bardzo popularny i~możliwe jest~znalezienie wielu gotowych instancji, których~można użyć w~celu przeprowadzenia badań. W~naszych eksperymentach wybraliśmy 9~instancji z~udostępnionego przez~uniwersytet w~Heidelberg zbioru~\cite{instances}. Są~to:
 
 \begin{enumerate}
-    \item berlin52,
-    \item ch130,
     \item eil51,
-    \item kroA100,
-    \item lin105,
+    \item berlin52,
     \item pr76,
+    \item kroA100,
+    \item kroC100,
     \item rd100,
+    \item lin105,
+    \item ch130,
     \item tsp225.
 \end{enumerate}
 

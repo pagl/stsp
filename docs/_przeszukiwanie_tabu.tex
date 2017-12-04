@@ -1,6 +1,6 @@
 \subsection{Opis}
 
-Tabu Search jest drugim algorytmem optymalizacyjnym przedstawionym w sprawozdaniu, który pozwala na wychodzenie z optimów lokalnych poprzez dopuszczenie ruchów pogarszających rozwiązanie. Istnieją dwie popularne wersje tego rozwiązania --- z listą tabu, czyli zakazanych ruchów oraz z elitarną listą kandydatów. Na potrzeby eksperymentu zdecydowaliśmy się zaimplementować tę drugą wersję.
+Tabu Search jest drugim algorytmem optymalizacyjnym przedstawionym w sprawozdaniu, który pozwala na wychodzenie z optimów lokalnych poprzez dopuszczenie ruchów pogarszających rozwiązanie. Istnieją dwie popularne wersje tego rozwiązania -- z listą tabu, czyli zakazanych ruchów oraz z elitarną listą kandydatów. Na potrzeby eksperymentu zdecydowaliśmy się zaimplementować tę drugą wersję.
 
 Algorytm Tabu Search jest można opisać w następujący sposób\cite{TS}:
 
@@ -23,13 +23,13 @@ Po zainicjalizowaniu parametrów początkowych, należy powtarzać aż do osiąg
 
 \subsection{Elitarna lista kandydatów}
 
-W naszym rozwiązaniu postanowiliśmy zastosować elitarną listę kandydatów. Polega ona na tym, że w momencie, kiedy dotychczas posiadana lista kandydatów jest niewystarczająca, co może się zdarzyć z dwóch powodów --- jest pusta lub najlepszy kandydat na liście jest gorszy od najsłabszego kandydata w momencie generowania tej listy, należy stworzyć nową listę kandydatów.
+W naszym rozwiązaniu postanowiliśmy zastosować elitarną listę kandydatów. Polega ona na tym, że w momencie, kiedy dotychczas posiadana lista kandydatów jest niewystarczająca, co może się zdarzyć z dwóch powodów -- jest pusta lub najlepszy kandydat na liście jest gorszy od najsłabszego kandydata w momencie generowania tej listy, należy stworzyć nową listę kandydatów.
 
 Aby stworzyć nową listę kandydatów, należy przejrzeć całe sąsiedztwo aktualnego rozwiązania i wybrać spośród sąsiadów określoną listę najlepszych. Ruchy, które prowadzą do ich osiągnięcia tworzą nową elitarną listę kandydatów.
 
 W następnych krokach algorytmu lista ta jest utrzymywana i sprawdza się tylko tych sąsiadów aktualnego rozwiązania, do których prowadzą ruchy z listy i wybiera się spośród nich najlepszy. Następnie ruch ten jest z listy usuwany, aby nie został powtórzony w przyszłości, aż do czasu wygenerowania nowej elitarnej listy kandydatów.
 
-Dzięki takiemu rozwiązaniu, można znacznie ograniczyć liczbę przeszukiwanych sąsiadów każdego rozwiązania i wychodzić z optimów lokalnych --- gdy nie ma rozwiązania, które poprawia wynik, też tworzy się listy kandydatów, które pogarszają go w najmniejszym stopniu.
+Dzięki takiemu rozwiązaniu, można znacznie ograniczyć liczbę przeszukiwanych sąsiadów każdego rozwiązania i wychodzić z optimów lokalnych -- gdy nie ma rozwiązania, które poprawia wynik, też tworzy się listy kandydatów, które pogarszają go w najmniejszym stopniu.
 
 \subsection{Cechy algorytmu}
 
@@ -37,7 +37,7 @@ Jedną z głównych cech algorytmu i zarazem przyczyn jego powstania jest dopusz
 
 \subsection{Parametry}
 
-Nasza implementacja tabu search ma zasadniczo dwa główne parametry --- wielkość elitarnej listy kandydatów $k$ i liczba iteracji bez poprawy najlepszego rozwiązania do zakończenia algorytmu $P \cdot L$.
+Nasza implementacja tabu search ma zasadniczo dwa główne parametry -- wielkość elitarnej listy kandydatów $k$ i liczba iteracji bez poprawy najlepszego rozwiązania do zakończenia algorytmu $P \cdot L$.
 Początkowo wyszliśmy od parametrów $k = sizeofinstance() / 10$ i $P \cdot L = 10 \cdot sizeofinstance()$. Próbowaliśmy je ręcznie zmieniać i konfigurować, jednak nie poprawiało to znacząco wyników. Zauważyliśmy jedynie, że zmniejszając $k$ lub $L \cdot P$, algorytm szybciej się kończył, często jednak z gorszym rezultatem.
 
 \subsection{Podsumowanie}

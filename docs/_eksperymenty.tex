@@ -1,6 +1,8 @@
 \subsection{Odległość od optimum}
 
-Z~rys.~\ref{fig:avg} wynika, że~dla~każdej instancji problemu, heurystyka i~algorytmy przeszukiwania lokalnego osiągają podobne wyniki, które są~kilkukrotnie lepsze od~rozwiązania losowego, z~którego startują zarówno Greedy, jak~i~Steepest. Algorytmy Greedy i~Steepest dają podobne rezultaty --- różnią się nieznacznie dla~różnych instancji i~nie~ma~tendencji co~do~tego, który ogólnie działa lepiej. Można za~to~zaobserwować, że~oba~algorytmy przeszukiwania lokalnego są~lepsze niż~heurystyka.
+Rozwiązanie końcowe zaprezentowane na wykresach jest to bezwzględna suma odległości trasy komiwojażera.
+
+Z~Rys.~\ref{fig:avg} wynika, że~dla~każdej instancji problemu, heurystyka i~algorytmy przeszukiwania lokalnego osiągają podobne wyniki, które są~kilkukrotnie lepsze od~rozwiązania losowego, z~którego startują zarówno Greedy, jak~i~Steepest. Algorytmy Greedy i~Steepest dają podobne rezultaty -- różnią się nieznacznie dla~różnych instancji i~nie~ma~tendencji co~do~tego, który ogólnie działa lepiej. Można za~to~zaobserwować, że~oba~algorytmy przeszukiwania lokalnego są~lepsze niż~heurystyka.
 
 \begin{figure}[H]
 \begin{center}
@@ -50,7 +52,7 @@ Z~rys.~\ref{fig:avg} wynika, że~dla~każdej instancji problemu, heurystyka i~al
 
 \subsection{Czas działania}
 
-Algorytm losowy jest~zdecydowanie najszybszy, ponieważ sprawdza tylko jedno rozwiązanie. Podobnie heurystyka, jednak wyznaczenie przez nią~rozwiązania zajmuje trochę więcej czasu. Greedy i~Steepest przeszukują przestrzeń rozwiązań, dopóki nie~mogą już~bardziej poprawić wyniku, przez co~trwają zdecydowanie najdłużej. Przeważnie obliczenia Steepesta zajmują więcej czasu, niż~wykonanie algorytmu Greedy. Na~rys.~\ref{fig:time} można~też~zauważyć, że~pojedyncze wykonania trwają znacznie dłużej od~pozostałych --- szczególnie jest~to~widoczne przy~instancji berlin52.
+Heurystyka jest~zdecydowanie najszybsza, ponieważ sprawdza tylko jedno rozwiązanie. Greedy i~Steepest przeszukują przestrzeń rozwiązań, dopóki nie~mogą już~bardziej poprawić wyniku, przez co~trwają zdecydowanie najdłużej. Przeważnie obliczenia Steepesta zajmują więcej czasu, niż~wykonanie algorytmu Greedy. Na~rys.~\ref{fig:time} można~też~zauważyć, że~pojedyncze wykonania trwają znacznie dłużej od~pozostałych -- szczególnie jest~to~widoczne przy~instancji berlin52. Algorytm losowy zawsze sprawdza określoną liczbę rozwiązań, więc~czas jego działania jest~stały.
 
 \begin{figure}[H]
 \begin{center}
@@ -68,7 +70,7 @@ Aby porównać algorytmy pod~względem jakości, można to~zrobić przez zdefini
 
 \subsubsection{Wyniki}
 
-Z~wykresów~\ref{fig:cost} i~\ref{fig:quality} można by~wyciągnąć wniosek, że~najefektywniejszym algorytmem jest~algorytm losowy, ponieważ zajmuje najmniej czasu. Takie wyniki są~jednak konsekwencją tego, że~przy każdy krok algorytmu przeszukiwania lokalnego jest~dość kosztowny, ponieważ przegląda się wiele rozwiązań, a~rozwiązanie jest~poprawiane nieznacznie (zgodnie z~założeniem algorytmów przeszukiwania lokalnego, że~funkcja celu sąsiadów niewiele się różni). Podobnie przy heurystyce --- nawet złożoność $\theta(n^2)$ nie~gwarantuje ulepszenia rozwiązania n-krotnie, a~jedynie kilkukrotnie, więc~koszt algorytmu jest~stosunkowo wysoki.
+Z~wykresów~\ref{fig:cost} i~\ref{fig:quality} można by~wyciągnąć wniosek, że~najefektywniejszym algorytmem jest~algorytm losowy, ponieważ zajmuje najmniej czasu. Takie wyniki są~jednak konsekwencją tego, że~przy każdy krok algorytmu przeszukiwania lokalnego jest~dość kosztowny, ponieważ przegląda się wiele rozwiązań, a~rozwiązanie jest~poprawiane nieznacznie (zgodnie z~założeniem algorytmów przeszukiwania lokalnego, że~funkcja celu sąsiadów niewiele się różni). Podobnie przy heurystyce -- nawet złożoność $\theta(n^2)$ nie~gwarantuje ulepszenia rozwiązania $n$-krotnie, a~jedynie kilkukrotnie, więc~koszt algorytmu jest~stosunkowo wysoki.
 
 Na~wykresie kosztu widać również, że~Greedy jest~kosztowniejszy od~Steepesta, ponieważ daje zbliżone rozwiązania w~dłuższym czasie.
 
@@ -102,7 +104,7 @@ Wykres~\ref{fig:steps} przedstawia liczbę kroków wykonanych przez algorytmy lo
 
 \subsection{Średnia liczba przeszukanych rozwiązań}
 
-Na~wykresie \ref{fig:nsol} jest~przedstawiona liczba rozwiązań przeszukiwanych przez~oba rozważane algorytmy lokalnego przeszukiwania. Można na~nim~zauważyć, że~średnio Steepest przeszukuje większą przestrzeń, choć~zdarzają się wykonania algorytmu Greedy, które~sprawdzają większą liczbę rozwiązań. Jest to~o~tyle ciekawe, że~Steepest wykonuje mniej kroków, niż~Greedy, a~i~tak aby~je~wykonać, przegląda więcej rozwiązań. Co~ciekawe, ta~tendencja jest~odmienna dla~największej instancji, podobnie~też, czas działania algorytmu Greedy dla~niej jest~większy od~Steepesta.
+Na~wykresie \ref{fig:nsol} jest~przedstawiona liczba rozwiązań przeszukiwanych przez~oba rozważane algorytmy lokalnego przeszukiwania. Można na~nim~zauważyć, że~średnio Steepest przeszukuje większą przestrzeń, choć~zdarzają się wykonania algorytmu Greedy, które~sprawdzają większą liczbę rozwiązań. Jest to~o~tyle ciekawe, że~Steepest wykonuje mniej kroków, niż~Greedy, a~i~tak aby~je~wykonać, przegląda więcej rozwiązań. Co~ciekawe, ta~tendencja jest~odmienna dla~największej instancji; podobnie~też, czas działania algorytmu Greedy dla~niej jest~większy od~Steepesta.
 
 \begin{figure}[H]
 \begin{center}
@@ -158,13 +160,13 @@ Wykresy~\ref{fig:more_berlin} i~\ref{fig:more_eil} przedstawiają wartość najl
 
 \subsubsection{Miara odległości rozwiązań od rozwiązania optymalnego}
 
-Aby~porównywać między sobą rozwiązania, postanowiliśmy badać, jak~wiele mają takich samych krawędzi. Aby~to~zmierzyć, dla~każdej krawędzi w~jednym rozwiązaniu, sprawdzamy, czy~istnieje ona~w~drugim (skierowana w~dowolną stronę, ponieważ obie krawędzie są~symetryczne).
+Aby~porównywać między sobą rozwiązania, postanowiliśmy zbadać, jak~wiele mają takich samych krawędzi. Aby~to~zmierzyć, dla~każdej krawędzi w~jednym rozwiązaniu, sprawdzamy, czy~istnieje ona~w~drugim (skierowana w~dowolną stronę, ponieważ obie krawędzie są~symetryczne).
 
 \subsubsection{Wyniki}
 
 Na~rysunku~\ref{fig:sim} można zaobserwować podobieństwo rozwiązań znajdowanych przez algorytmy do~rozwiązania optymalnego. Istnieje wyraźna zależność polegająca na~tym, że~im~lepsze rozwiązanie, tym~jest~bardziej podobne do~optymalnego.
 
-Bardzo mocno wyróżnia się chmura rozwiązań losowych --- jakość rozwiązań jest~bardzo różnorodna, ale~wszystkie są~bardzo mało podobne do~rozwiązania optymalnego (poniżej 10\%, a~im~więcej miast w~instancji, tym~mniej podobne).
+Bardzo mocno wyróżnia się chmura rozwiązań losowych -- jakość rozwiązań jest~bardzo różnorodna, ale~wszystkie są~bardzo mało podobne do~rozwiązania optymalnego (poniżej 10\%, a~im~więcej miast w~instancji, tym~mniej podobne).
 
 \begin{figure}[H]
 \begin{center}

@@ -8,11 +8,11 @@ Aby stosować przeszukiwanie lokalne, należy określić sąsiedztwo dla każdeg
 
 \subsubsection{OPT-2}
 
-Sąsiedztwo OPT-2 definiuje się poprzez zamianę kolejności wierzchołków na~dwóch pozycjach lub~odwrócenie kolejności odwiedzania miast na~łuku pomiędzy dwoma pozycjami. W~zależności od~tego, czy~rozważany problem komiwojażera jest~symetryczny, czy~nie --- różne sąsiedztwa sprawdzają się z~odmienną skutecznością. Rozważając, które z~sąsiedztw wybrać, należy zastanowić się, które z~nich w~najmniejszym stopniu wpływa na~funkcję celu.
+Sąsiedztwo OPT-2 definiuje się poprzez zamianę kolejności wierzchołków na~dwóch pozycjach lub~odwrócenie kolejności odwiedzania miast na~łuku pomiędzy dwoma pozycjami. W~zależności od~tego, czy~rozważany problem komiwojażera jest~symetryczny, czy~nie -- różne sąsiedztwa sprawdzają się z~odmienną skutecznością. Rozważając, które z~sąsiedztw wybrać, należy zastanowić się, które z~nich w~najmniejszym stopniu wpływa na~funkcję celu.
 
 \paragraph{Zamiana miast}
 
-Sąsiedztwo OPT-2 polegające na zamianie miast można zaimplementować poprzez prostą zamianę elementów na pozycji i-tej i j-tej. Jest ono skuteczniejsze dla problemu asymetrycznego komiwojażera, ponieważ zamiana łuków spowodowałaby większą różnicę w~funkcji celu --- inne byłyby nie tylko cztery drogi, prowadzące do dwóch zamienianych miast, lecz także wszystkie drogi na łuku.
+Sąsiedztwo OPT-2 polegające na zamianie miast można zaimplementować poprzez prostą zamianę elementów na pozycji $i$-tej i $j$-tej. Jest ono skuteczniejsze dla problemu asymetrycznego komiwojażera, ponieważ zamiana łuków spowodowałaby większą różnicę w~funkcji celu -- inne byłyby nie tylko cztery drogi, prowadzące do dwóch zamienianych miast, lecz także wszystkie drogi na łuku.
 
 \paragraph{Odwrócenie łuku}
 
