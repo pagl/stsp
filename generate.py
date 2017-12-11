@@ -32,8 +32,8 @@ OUTPUT_DIR = os.path.join("docs", "results")
 GRAPH_DIR = os.path.join("docs", "graphs")
 AGG_DATA_FILE = "agg_data.csv"
 AGG_DATA_FIELDS = ["algorithm", "instance", "run_id", "init_score",
-                   "final_score", "best_so_far", "iterations",
-                   "steps", "run_time", "similarity", "quality", "cost"]
+                   "final_score", "score_dist_ratio", "best_so_far", "steps",
+                   "solutions", "run_time", "similarity", "quality", "cost"]
 
 ALGORITHMS = ["random", "heuristic", "greedy", "steepest", "tabusearch", "annealing"]
 EXPERIMENT_MAX_TIME = 5000
@@ -57,7 +57,7 @@ def aggregate_results(clear_dir=True):
             cost = float(row[6]) / float(row[2])
             quality = 1 / cost
             data_points.append([algorithm, instance] + row + [str(quality), str(cost)])
-        data_points.append(["optimal", instance, "-1", "-1", data[-1], "-1", "-1", "-1", "-1", "-1", "-1", "-1"])
+        data_points.append(["optimal", instance, "-1", "-1", data[-1], "1", "-1", "-1", "-1", "-1", "-1", "-1"])
     if clear_dir:
         clear_directory(OUTPUT_DIR)
     open(os.path.join(OUTPUT_DIR, AGG_DATA_FILE), "w").write("\n".join(map(",".join, data_points)))
