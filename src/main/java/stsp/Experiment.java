@@ -39,6 +39,7 @@ public class Experiment {
             logger.write(String.valueOf(iter++) + ",");
             logger.write(String.valueOf(result.initialScore) + ",");
             logger.write(String.valueOf(result.score) + ",");
+            logger.write(String.valueOf(result.score / this.solver.getOptimalDistance()) + ",");
             logger.write(String.valueOf(bestScoreSoFar) + ",");
             logger.write(String.valueOf(result.steps) + ",");
             logger.write(String.valueOf(result.nSolutions) + ",");
