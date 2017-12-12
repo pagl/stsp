@@ -1,8 +1,18 @@
 \subsection{Odległość od optimum}
 
-Rozwiązanie końcowe zaprezentowane na wykresach jest to bezwzględna suma odległości trasy komiwojażera.
+{\color{part2}
+Rozwiązanie końcowe zaprezentowane na wykresach jest to iloraz długości trasy komiwojażera do długości trasy optymalnej.
 
-Z~Rys.~\ref{fig:avg} wynika, że~dla~każdej instancji problemu, heurystyka i~algorytmy przeszukiwania lokalnego osiągają podobne wyniki, które są~kilkukrotnie lepsze od~rozwiązania losowego, z~którego startują zarówno Greedy, jak~i~Steepest. Algorytmy Greedy i~Steepest dają podobne rezultaty -- różnią się nieznacznie dla~różnych instancji i~nie~ma~tendencji co~do~tego, który ogólnie działa lepiej. Można za~to~zaobserwować, że~oba~algorytmy przeszukiwania lokalnego są~lepsze niż~heurystyka.
+Praktycznie dla~każdej instancji problemu, heurystyka i~algorytmy przeszukiwania lokalnego osiągają kilkukrotnie lepsze wyniki od~rozwiązania losowego, z~którego startują zarówno Greedy, jak~i~Steepest, więc aby zwiększyć czytelność wykresów, algorytm losowy nie~jest~na~nich przedstawiany.}
+
+Na Rys. \ref{fig:avg} widać, że algorytmy Greedy i~Steepest dają podobne rezultaty -- różnią się nieznacznie dla~różnych instancji i~nie~ma~tendencji co~do~tego, który ogólnie działa lepiej. Można za~to~zaobserwować, że~oba~algorytmy przeszukiwania lokalnego są~lepsze niż~heurystyka.
+
+{\color{part2}
+Tabusearch dla większości instancji działa podobnie do Greedy i~Steepesta. Daje minimalną poprawę lub~wręcz jest~o~kilka procent gorszy. Jest~to~algorytm, który~ogranicza losowość do~minimum -- właściwie tylko do~wyboru rozwiązania początkowego, jego~działanie jest~więc~bardzo wrażliwe na~ustawione parametry. Być~może gdyby spróbować je~lepiej dostosować, osiągane rezultaty byłyby bardziej zadowalające. Aktualne gorsze wyniki od~algorytmów przeszukiwania lokalnego mogą~być~spowodowane np.~zbyt dużym rozmiarem \textit{master list}, przez co~można się za~bardzo oddalać od~najlepszych rozwiązań lub~krążyć wokół nich, nie~mogąc ich~osiągnąć.
+
+Algorytm symulowanego wyżarzania po~dobraniu odpowiednich parametrów zaczął dawać nadspodziewanie dobre rezultaty. Właściwie dla~każdej instancji pobiło pozostałe algorytmy o~kilka procent.
+%TODO: PG
+}
 
 \begin{figure}[H]
 \begin{center}
@@ -54,6 +64,13 @@ Z~Rys.~\ref{fig:avg} wynika, że~dla~każdej instancji problemu, heurystyka i~al
 
 Heurystyka jest~zdecydowanie najszybsza, ponieważ sprawdza tylko jedno rozwiązanie. Greedy i~Steepest przeszukują przestrzeń rozwiązań, dopóki nie~mogą już~bardziej poprawić wyniku, przez co~trwają zdecydowanie najdłużej. Przeważnie obliczenia Steepesta zajmują więcej czasu, niż~wykonanie algorytmu Greedy. Na~rys.~\ref{fig:time} można~też~zauważyć, że~pojedyncze wykonania trwają znacznie dłużej od~pozostałych -- szczególnie jest~to~widoczne przy~instancji berlin52. Algorytm losowy zawsze sprawdza określoną liczbę rozwiązań, więc~czas jego działania jest~stały.
 
+{\color{part2}
+Algorytm Tabusearch trwa zdecydowanie najdłużej ze wszystkich. Jest to spowodowane dość łagodnym warunkiem stopu, przez co przeszukuje bardzo dużą przestrzeń rozwiązań -- stosunkowo większą niż pozostałe algorytmy optymalizacyjne, co widać na Rys. \ref{fig:nsol}.
+
+Symulowane wyżarzanie dzięki temu, że~nie~przegląda całego sąsiedztwa, przy~wysokich temperaturach właściwie bardzo szybko przechodzi do~kolejnych rozwiązań, ostatecznie działa bardzo szybko -- dla~większych instancji nawet szybciej od~algorytmów Greedy i~Steepest.
+%TODO: PG
+}
+
 \begin{figure}[H]
 \begin{center}
 \includegraphics[width=1.0\textwidth]{graphs/time_comparison_letval.pdf}
@@ -73,6 +90,13 @@ Aby porównać algorytmy pod~względem jakości, można to~zrobić przez zdefini
 Z~wykresów~\ref{fig:cost} i~\ref{fig:quality} można by~wyciągnąć wniosek, że~najefektywniejszym algorytmem jest~algorytm losowy, ponieważ zajmuje najmniej czasu. Takie wyniki są~jednak konsekwencją tego, że~przy każdy krok algorytmu przeszukiwania lokalnego jest~dość kosztowny, ponieważ przegląda się wiele rozwiązań, a~rozwiązanie jest~poprawiane nieznacznie (zgodnie z~założeniem algorytmów przeszukiwania lokalnego, że~funkcja celu sąsiadów niewiele się różni). Podobnie przy heurystyce -- nawet złożoność $\theta(n^2)$ nie~gwarantuje ulepszenia rozwiązania $n$-krotnie, a~jedynie kilkukrotnie, więc~koszt algorytmu jest~stosunkowo wysoki.
 
 Na~wykresie kosztu widać również, że~Greedy jest~kosztowniejszy od~Steepesta, ponieważ daje zbliżone rozwiązania w~dłuższym czasie.
+
+{\color{part2}
+Implementacja przeszukiwania tabu okazała się najwolniejszym algorytmem ze~wszystkich badanych, w~dodatku zwracającym często minimalnie gorsze wyniki od~pozostałych, w~związku z~czym na~wykresie kosztów, wyraźnie góruje nad~innymi algorytmami.
+
+Koszty symulowanego wyżarzania są~przeważnie mniejsze od~innych algorytmów dzięki dobrym wynikom i~krótkiemu czasowi działania.
+%TODO: PG
+}
 
 \begin{figure}[H]
 \begin{center}
@@ -94,11 +118,18 @@ Na~wykresie kosztu widać również, że~Greedy jest~kosztowniejszy od~Steepesta
 
 Wykres~\ref{fig:steps} przedstawia liczbę kroków wykonanych przez algorytmy lokalnego przeszukiwania. Widać, że~Greedy wykonuje ich kilkakrotnie więcej niż~Steepest, a~także, że~liczba wykonanych kroków przez ten~algorytm jest~dużo bardziej zróżnicowana, w~zależności od~przypadku startowego. Jest~to~spowodowane tym, że~algorytm Steepest we~wcześniejszym kroku osiąga lokalnie najlepsze rozwiązanie, ponieważ za~każdym razem wybiera to, które~najbardziej poprawia wynik z~całego sąsiedztwa.
 
+{\color{part2}
+Algorytm Tabu Search wykonuje więcej kroków niż algorytmy lokalnego przeszukiwania. Nie zatrzymuje się on na optimach lokalnych, ale stara się z nich wychodzić, w poszukiwaniu lepszych rozwiązań tak długo, aż nie znajduje ulepszeń po określonej liczbie kroków.
+
+Algorytm symulowanego wyżarzania wykonuje wielokrotnie więcej kroków od pozostałych, jednak wykonuje je dużo szybciej -- właściwie na każdym wykonanym kroku, przegląda maksymalnie kilka rozwiązań, szczególnie przy wysokiej temperaturze.
+%TODO: PG
+}
+
 \begin{figure}[H]
 \begin{center}
 \includegraphics[width=1.0\textwidth]{graphs/steps_comparison_violin.pdf}
 \end{center}
-\caption{Porównanie algorytmów Greedy Search i~Steepest pod~względem liczby kroków do~zatrzymania.}
+\caption{Porównanie algorytmów pod~względem liczby kroków do~zatrzymania.}
 \label{fig:steps}
 \end{figure}
 
@@ -106,11 +137,18 @@ Wykres~\ref{fig:steps} przedstawia liczbę kroków wykonanych przez algorytmy lo
 
 Na~wykresie \ref{fig:nsol} jest~przedstawiona liczba rozwiązań przeszukiwanych przez~oba rozważane algorytmy lokalnego przeszukiwania. Można na~nim~zauważyć, że~średnio Steepest przeszukuje większą przestrzeń, choć~zdarzają się wykonania algorytmu Greedy, które~sprawdzają większą liczbę rozwiązań. Jest to~o~tyle ciekawe, że~Steepest wykonuje mniej kroków, niż~Greedy, a~i~tak aby~je~wykonać, przegląda więcej rozwiązań. Co~ciekawe, ta~tendencja jest~odmienna dla~największej instancji; podobnie~też, czas działania algorytmu Greedy dla~niej jest~większy od~Steepesta.
 
+{\color{part2}
+Przeszukiwanie tabu nie tylko wykonuje najwięcej kroków, ale też przegląda najwięcej rozwiązań.
+
+Algorytm symulowanego wyżarzania mimo wykonywania wielu kroków, sprawdza często nawet mniej rozwiązań niż pozostałe algorytmy.
+%TODO: PG
+}
+
 \begin{figure}[H]
 \begin{center}
 \includegraphics[width=1.0\textwidth]{graphs/solutions_comparison_violin.pdf}
 \end{center}
-\caption{Porównanie algorytmów Greedy Search i~Steepest pod~względem liczby przeszukanych rozwiązań.}
+\caption{Porównanie algorytmów pod~względem liczby przeszukanych rozwiązań.}
 \label{fig:nsol}
 \end{figure}
 
