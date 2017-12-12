@@ -28,7 +28,7 @@ public class RandomSolver extends Solver {
     protected int[] next() {
         this.bestScore = Float.MAX_VALUE;
         
-        for (int x = 0; x < 1e6; x++) {
+        for (int x = 0; x < 1e5; x++) {
             Utilities.shuffle(this.solution);
             
             currScore = this.data.evaluate(this.solution);

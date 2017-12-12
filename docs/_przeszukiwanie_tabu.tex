@@ -4,20 +4,16 @@ Tabu Search jest drugim algorytmem optymalizacyjnym przedstawionym w sprawozdani
 
 Algorytm Tabu Search jest można opisać w następujący sposób\cite{TS}:
 
-\begin{algorithm}[caption={Integer division.}, label={alg1}]
-procedure PRZESZUKIWANIE TABU
-begin
-  INICJALIZUJ(xstart, xbest, T)
-  x := xstart
-  repeat
-    GENERUJ(V $\in$ N(x))
-    WYBIERZ(x0) //najlepsze f w V + aspiracja
-    UAKTUALNIJ LISTE TABU(T)
-    if f (x0) $\le$ f(xbest) then xbest := x0
-    x := x0
-  until WARUNEK STOPU
-end
-\end{algorithm}
+\begin{enumerate}
+    \item Inicjalizacja: xstart, xbest, T
+    \item x := xstart
+    \item Generuj V $\in$ N(x)
+    \item Wybierz x0 -- najlepsze f w V + aspiracja
+    \item Uaktualnij listę tabu: T
+    \item if f(x0) $\le$ f(xbest) then xbest := x0
+    \item x := x0
+    \item Jeżeli jest~spełniony \emph{warunek stopu}, zakończ algorytm, w~przeciwnym razie wróć do~kroku~3.
+\end{enumerate}
 
 Po zainicjalizowaniu parametrów początkowych, należy powtarzać aż do osiągnięcia warunku stopu, którym w naszym rozwiązaniu jest określona liczba iteracji bez poprawy rozwiązania, kolejne kroki: najpierw należy ustalić listę kandydatów na ruch, następnie wybrać z niej ten, który prowadzi do najlepszego rozwiązania, usunąć wybrany krok z listy kandydatów, aby go nie powtórzyć w przyszłości, na końcu uaktualnić najlepsze znalezione dotychczas rozwiązanie, jeśli aktualne jest lepsze od dotychczas najlepszego.
 

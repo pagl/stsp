@@ -38,7 +38,7 @@ AGG_DATA_FIELDS = ["algorithm", "instance", "run_id", "init_score",
 ALGORITHMS = ["random", "heuristic", "greedy", "steepest", "tabusearch", "annealing"]
 EXPERIMENT_MAX_TIME = 5000
 EXPERIMENT_MIN_ITER = 10
-EXPERIMENT_MAX_ITER = 400
+EXPERIMENT_MAX_ITER = 300
 
 
 def clear_directory(directory):
@@ -80,14 +80,24 @@ def generate_results():
         print("Data: {}".format(datafile))
         for algorithm in ALGORITHMS:
             print("    {:<20}{}".format(algorithm, datetime.now()))
-            run_experiment(datafile=datafile.rstrip(".tsp"),
-                           max_time=EXPERIMENT_MAX_TIME,
-                           min_iter=EXPERIMENT_MIN_ITER,
-                           max_iter=EXPERIMENT_MAX_ITER,
-                           algorithm=algorithm,
-                           output=os.path.join(OUTPUT_DIR,
-                                               "{}_{}".format(os.path.split(datafile)[-1]
-                                                              .rstrip(".tsp"), algorithm)))
+            if algorithm == "random" or algorithm == "greedy" or algorithm == "steepest":
+                run_experiment(datafile=datafile.rstrip(".tsp"),
+                               max_time=EXPERIMENT_MAX_TIME,
+                               min_iter=300,
+                               max_iter=EXPERIMENT_MAX_ITER,
+                               algorithm=algorithm,
+                               output=os.path.join(OUTPUT_DIR,
+                                                   "{}_{}".format(os.path.split(datafile)[-1]
+                                                                  .rstrip(".tsp"), algorithm)))
+            else:
+                run_experiment(datafile=datafile.rstrip(".tsp"),
+                               max_time=EXPERIMENT_MAX_TIME,
+                               min_iter=EXPERIMENT_MIN_ITER,
+                               max_iter=EXPERIMENT_MAX_ITER,
+                               algorithm=algorithm,
+                               output=os.path.join(OUTPUT_DIR,
+                                                   "{}_{}".format(os.path.split(datafile)[-1]
+                                                                  .rstrip(".tsp"), algorithm)))
     aggregate_results()
 
 
