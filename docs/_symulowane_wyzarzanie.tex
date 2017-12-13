@@ -1,15 +1,15 @@
 \subsection{Opis}
 
-Algorytm symulowanego wyżarzania jest heurystyczną metodą przeszukującą przestrzeń alternatywnych rozwiązań w celu znalezienia najlepszego rozwiązania, czyli takiego będącego najbliżej optimum pod względem wartości funkcji kosztu. Polega on na iteracyjnym wyborze losowych rozwiązań z przestrzeni lokalnych solucji i akceptacji ich w przypadku gdy zmniejszają one wartość funkcji kosztu, bądź spełniają odpowiednie warunki probabilistyczne degradowane wraz z upływem kolejnych iteracji. Algorytm opisujący kolejne kroki tej metody został przedstawiony poniżej.
+Algorytm symulowanego wyżarzania jest~heurystyczną metodą przeszukującą przestrzeń alternatywnych rozwiązań w~celu znalezienia najlepszego rozwiązania, czyli~takiego będącego najbliżej optimum pod~względem wartości funkcji kosztu. Polega on~na~iteracyjnym wyborze losowych rozwiązań z~przestrzeni lokalnych solucji i~akceptacji ich w~przypadku gdy~zmniejszają one~wartość funkcji kosztu, bądź~spełniają odpowiednie warunki probabilistyczne degradowane wraz z~upływem kolejnych iteracji. Algorytm opisujący kolejne kroki tej~metody został przedstawiony poniżej.
 
 \begin{enumerate}
-	\item Wygeneruj temperaturę startową $T_0$, rozwiązanie początkowe $x = x_{init}$, liczbę kroków $L$ co które aktualizowana jest temperatura, oraz stopień redukcji temperatury $\alpha~\epsilon~(0, 1)$.
-	\item Powtarzaj dopóki warunek stopu nie został spełniony:
+	\item Wygeneruj temperaturę startową $T_0$, rozwiązanie początkowe $x = x_{init}$, liczbę kroków $L$ co~które~aktualizowana jest~temperatura, oraz~stopień redukcji temperatury $\alpha~\epsilon~(0, 1)$.
+	\item Powtarzaj dopóki warunek stopu nie~został spełniony:
 	\begin{enumerate}
 		\item Powtarzaj $L$ razy:
 		\begin{enumerate}
-			\item Generuj losowe rozwiązanie $x'$ w sąsiedztwie rozwiązania $x$.
-			\item Jeżeli nowe rozwiązanie jest lepsze od poprzedniego $f(x') <= f(x)$, lub warunek wyboru gorszego rozwiązania zostanie spełniony:
+			\item Generuj losowe rozwiązanie $x'$ w~sąsiedztwie rozwiązania $x$.
+			\item Jeżeli nowe rozwiązanie jest~lepsze od poprzedniego $f(x') <= f(x)$, lub~warunek wyboru gorszego rozwiązania zostanie spełniony:
 			\begin{enumerate}
 				\item Zaakceptuj nowe rozwiązanie $x = x'$.
 			\end{enumerate}
@@ -18,45 +18,45 @@ Algorytm symulowanego wyżarzania jest heurystyczną metodą przeszukującą prz
 	\end{enumerate}
 \end{enumerate}
 
-Powyżej przedstawiony generyczny algorytm może zostać wykorzystany w wielu scenariuszach optymalizacyjnych. Dla zadania postawionego w tym zadaniu należało odpowiednio dostroić powyższy algorytm, tak aby najskuteczniej radził sobie w znajdowaniu rozwiązania dla problemu STSP.
+Powyżej przedstawiony generyczny algorytm może zostać wykorzystany w~wielu scenariuszach optymalizacyjnych. Dla~zadania postawionego w~tym zadaniu należało odpowiednio dostroić powyższy algorytm, tak~aby~najskuteczniej radził sobie w~znajdowaniu rozwiązania dla~problemu STSP.
 
 
 \subsection{Dobór temperatury początkowej}
-Jednym z ważniejszych kroków w procesie symulowanego wyżarzania jest dobór odpowiedniej temperatury początkowej. Wartość ta decyduje w dużej mierze o czasie zbieżności do rozwiązania finalnego oraz liczbie zaakceptowanych gorszych lokalnie rozwiązań, które mogą prowadzić do nieoczekiwanej poprawy jakości rozwiązania w ujęciu globalnym. W naszej implementacji zdecydowaliśmy się dobierać ten parametr w sposób adaptatywny, ściśle zależny od instancji problemu oraz wygenerowanego pierwszego rozwiązania. Wartość ta wyliczana jest zgodnie z poniższym wzorem.
+Jednym z~ważniejszych kroków w~procesie symulowanego wyżarzania jest~dobór odpowiedniej temperatury początkowej. Wartość ta~decyduje w~dużej mierze o~czasie zbieżności do~rozwiązania finalnego oraz~liczbie zaakceptowanych gorszych lokalnie rozwiązań, które~mogą prowadzić do~nieoczekiwanej poprawy jakości rozwiązania w~ujęciu globalnym. W~naszej implementacji zdecydowaliśmy się dobierać ten parametr w~sposób adaptatywny, ściśle zależny od~instancji problemu oraz~wygenerowanego pierwszego rozwiązania. Wartość ta~wyliczana jest~zgodnie z~poniższym wzorem.
 
 \begin{equation}
 	T_0 = \frac{\sum_{k=0}^{K} f(G(x)) - f(x)}{K * \ln \theta}
 \end{equation}
 
-W powyższym wzorze, wektor $x$ jest oryginalnym wygenerowanym rozwiązaniem, funkcja $G(x)$ generuje nowe rozwiązanie $x'$ w sąsiedztwie rozwiązania $x$, a funkcja $f(x)$ zwraca wartość kosztu danego rozwiązania. Parametr $K$ określa liczbę rozwiązań które chcemy wygenerować, a $\theta$ procent akceptowanych ruchów. Tak przedstawiona metoda pozwala na lepszy dobór temperatury początkowej w odniesieniu do konkretnej instancji problemu. W postaci przedstawionej powyżej jest ona jednak wrażliwa na jakość wygenerowanego rozwiązania początkowego i może nie zawsze być prawidłowo dobrana. Wartość ta może być również obliczana rekurencyjnie biorąc pod uwagę szersze spektrum rozwiązań co pozwala na dokładniejszy dobór parametru \cite{saTemperature}. 
+W~powyższym wzorze, wektor $x$ jest~oryginalnym wygenerowanym rozwiązaniem, funkcja $G(x)$ generuje nowe rozwiązanie $x'$ w~sąsiedztwie rozwiązania $x$, a~funkcja $f(x)$ zwraca wartość kosztu danego rozwiązania. Parametr $K$ określa liczbę rozwiązań, które~chcemy wygenerować, a~$\theta$ procent akceptowanych ruchów. Tak~przedstawiona metoda pozwala na~lepszy dobór temperatury początkowej w~odniesieniu do~konkretnej instancji problemu. W~postaci przedstawionej powyżej jest~ona jednak wrażliwa na~jakość wygenerowanego rozwiązania początkowego i~może nie~zawsze być~prawidłowo dobrana. Wartość ta~może być~również obliczana rekurencyjnie biorąc pod~uwagę szersze spektrum rozwiązań co~pozwala na dokładniejszy dobór parametru \cite{saTemperature}. 
 
 
 \subsection{Generowanie nowego rozwiązania}
-W każdej iteracji algorytmu symulowanego wyżarzania należy wybrać jedno losowe rozwiązanie z przestrzeni lokalnych rozwiązań w sąsiedztwie OPT-2. W tym celu zdecydowaliśmy się wylosować dwie różne liczby całkowite w przedziale $(0, n)$, gdzie $n$ jest rozmiarem wektora rozwiązania, a następnie dokonać odwrócenia łuku między odpowiadającymi wierzchołkami w wektorze rozwiązania. Dzięki takiemu podejściu, nie jest potrzebne marnotrawienie zasobów operacyjnych i pamięciowych na generowanie i przechowywanie wszystkich rozwiązań dla danej iteracji algorytmu, z których następnie wybrane zostałoby tylko pojedyncze rozwiązanie, a reszta byłaby zbędna.
+W~każdej iteracji algorytmu symulowanego wyżarzania należy wybrać jedno losowe rozwiązanie z~przestrzeni lokalnych rozwiązań w~sąsiedztwie OPT-2. W~tym celu zdecydowaliśmy się wylosować dwie różne liczby całkowite w~przedziale $(0, n)$, gdzie~$n$ jest~rozmiarem wektora rozwiązania, a~następnie dokonać odwrócenia łuku między odpowiadającymi wierzchołkami w~wektorze rozwiązania. Dzięki takiemu podejściu, nie~jest~potrzebne marnotrawienie zasobów operacyjnych i~pamięciowych na~generowanie i~przechowywanie wszystkich rozwiązań dla~danej iteracji algorytmu, z~których następnie wybrane zostałoby tylko pojedyncze rozwiązanie, a~reszta byłaby zbędna.
 
 
 \subsection{Warunek akceptacji rozwiązania}
-Rozwiązanie $x'$ generowane w każdej iteracji algorytmu zostaje zaakceptowane tylko w przypadku, gdy jest ono nie gorsze od rozwiązania poprzedniego $f(x') <= f(x)$, lub spełniony jest warunek probabilistyczny:
+Rozwiązanie $x'$ generowane w~każdej iteracji algorytmu zostaje zaakceptowane tylko w~przypadku, gdy~jest~ono nie~gorsze od~rozwiązania poprzedniego $f(x') <= f(x)$, lub~spełniony jest~warunek probabilistyczny:
 
 \begin{equation}
 	e^{-\frac{f(x') - f(x)}{T_k}} > random(0, 1)
 \end{equation} 
 
-Dzięki takiemu podejściu, pozwalamy algorytmowi wybrać rozwiązanie gorsze z pewnym prawdopodobieństwem zależnym od aktualnej wartości temperatury. Może to mieć pozytywny skutek i pozwolić nam wyjść z lokalnego optimum, w którym moglibyśmy utknąć gdybyśmy heurystycznie dążyli tylko ku lokalnej poprawie. Należy zauważyć, iż poprzez degradacje wartości temperatury w kolejnych iteracjach, prawdopodobieństwo wybrania gorszego rozwiązania maleje.
+Dzięki takiemu podejściu, pozwalamy algorytmowi wybrać rozwiązanie gorsze z~pewnym prawdopodobieństwem zależnym od~aktualnej wartości temperatury. Może to~mieć pozytywny skutek i~pozwolić nam wyjść z~lokalnego optimum, w~którym moglibyśmy utknąć gdybyśmy heurystycznie dążyli tylko ku~lokalnej poprawie. Należy zauważyć, iż~poprzez degradacje wartości temperatury w~kolejnych iteracjach, prawdopodobieństwo wybrania gorszego rozwiązania maleje.
 
 
 \subsection{Warunek stopu}
-Istotą każdego algorytmu optymalizacyjnego jest dobrze zdefiniowany warunek stopu. W naszej implementacji zdecydowaliśmy się kończyć przeszukiwanie przestrzeni rozwiązań, w przypadku gdy wartość temperatury $T_k$ spadła poniżej minimalnej wartości temperatury $T_\omega$, lub gdy w przeciągu pewnej liczby iteracji $\sigma$ nie udało się poprawić jakości rozwiązania. 
+Istotą każdego algorytmu optymalizacyjnego jest~dobrze zdefiniowany warunek stopu. W~naszej implementacji zdecydowaliśmy się kończyć przeszukiwanie przestrzeni rozwiązań, w~przypadku gdy~wartość temperatury $T_k$ spadła poniżej minimalnej wartości temperatury $T_\omega$, lub~gdy~w~przeciągu pewnej liczby iteracji $\sigma$ nie~udało się poprawić jakości rozwiązania. 
 
 
 \subsection{Parametry}
-Jakość algorytmu symulowanego wyżarzania zależy od wielu parametrów, które decydują o czasie zbieżności do rozwiązania finalnego, liczbie przejrzanych lokalnie rozwiązań, czy szansie na akceptacje rozwiązań gorszych. Metodą prób, błędów i analizy dobraliśmy zestaw parametrów, które pozwalają w relatywnie krótkim czasie znajdować rozwiązania bliskie optimum. Poniżej przedstawione zostały wartości parametrów przedstawionych w tej sekcji.
+Jakość algorytmu symulowanego wyżarzania zależy od~wielu parametrów, które decydują o~czasie zbieżności do~rozwiązania finalnego, liczbie przejrzanych lokalnie rozwiązań, czy~szansie na~akceptację rozwiązań gorszych. Metodą prób, błędów i~analizy dobraliśmy zestaw parametrów, które pozwalają w~relatywnie krótkim czasie znajdować rozwiązania bliskie optimum. Poniżej przedstawione zostały wartości parametrów przedstawionych w~tej sekcji.
 
 \begin{itemize}
-	\item[--] $\alpha = 0.9$ -- stopień redukcji temperatury w kolejnych iteracjach.
+	\item[--] $\alpha = 0.9$ -- stopień redukcji temperatury w~kolejnych iteracjach.
 	\item[--] $\theta = 0.95$ -- procent akceptowanych ruchów przy doborze temperatury początkowej.
 	\item[--] $T_\omega = 0.1$ -- minimalna wartość temperatury kończąca algorytm.
-	\item[--] $K = 1000$ -- liczba powtórzeń generowania rozwiązania przy doborze temperatury.
+	\item[--] $K = 1000$ -- liczba powtórzeń generowania rozwiązania przy~doborze temperatury.
 \end{itemize}
 
 
