@@ -1,17 +1,16 @@
 \subsection{Odległość od optimum}
 
 {\color{part2}
-Rozwiązanie końcowe zaprezentowane na wykresach jest to iloraz długości trasy komiwojażera do długości trasy optymalnej.
+Rozwiązanie końcowe zaprezentowane na wykresach jest ilorazem długości trasy komiwojażera do długości trasy optymalnej.
 
-Praktycznie dla~każdej instancji problemu, heurystyka i~algorytmy przeszukiwania lokalnego osiągają kilkukrotnie lepsze wyniki od~rozwiązania losowego, z~którego startują zarówno Greedy, jak~i~Steepest, więc aby zwiększyć czytelność wykresów, algorytm losowy nie~jest~na~nich przedstawiany.}
+Dla każdej instancji problemu, algorytmy heurystyczne i przeszukiwania lokalnego osiągają kilkukrotnie lepsze wyniki od~rozwiązania losowego, z~którego startują zarówno Greedy, jak~i~Steepest, więc aby zwiększyć czytelność wykresów, algorytm losowy nie~jest~na~nich przedstawiany.}
 
 Na Rys. \ref{fig:avg} widać, że algorytmy Greedy i~Steepest dają podobne rezultaty -- różnią się nieznacznie dla~różnych instancji i~nie~ma~tendencji co~do~tego, który ogólnie działa lepiej. Można za~to~zaobserwować, że~oba~algorytmy przeszukiwania lokalnego są~lepsze niż~heurystyka.
 
 {\color{part2}
-Tabusearch dla większości instancji działa podobnie do Greedy i~Steepesta. Daje minimalną poprawę lub~wręcz jest~o~kilka procent gorszy. Jest~to~algorytm, który~ogranicza losowość do~minimum -- właściwie tylko do~wyboru rozwiązania początkowego, jego~działanie jest~więc~bardzo wrażliwe na~ustawione parametry. Być~może gdyby spróbować je~lepiej dostosować, osiągane rezultaty byłyby bardziej zadowalające. Aktualne gorsze wyniki od~algorytmów przeszukiwania lokalnego mogą~być~spowodowane np.~zbyt dużym rozmiarem \textit{master list}, przez co~można się za~bardzo oddalać od~najlepszych rozwiązań lub~krążyć wokół nich, nie~mogąc ich~osiągnąć.
+Tabu Search dla większości instancji działa podobnie do Greedy i~Steepesta. Daje minimalną poprawę lub~wręcz jest~o~kilka procent gorszy. Jest~to~algorytm, który~ogranicza losowość do~minimum -- właściwie tylko do~wyboru rozwiązania początkowego, jego~działanie jest~więc~bardzo wrażliwe na~ustawione parametry. Być~może gdyby spróbować je~lepiej dostosować, osiągane rezultaty byłyby bardziej zadowalające. Aktualne gorsze wyniki od~algorytmów przeszukiwania lokalnego mogą~być~spowodowane np.~zbyt dużym rozmiarem \textit{master list}, przez co~można się za~bardzo oddalać od~najlepszych rozwiązań lub~krążyć wokół nich, nie~mogąc ich~osiągnąć.
 
-Algorytm symulowanego wyżarzania po~dobraniu odpowiednich parametrów zaczął dawać nadspodziewanie dobre rezultaty. Właściwie dla~każdej instancji pobiło pozostałe algorytmy o~kilka procent.
-%TODO: PG
+Przy dobraniu odpowiednich parametrów, algorytm symulowanego wyżarzania pozwolił na znalezienie widocznie lepszych rozwiązań spośród wszystkich analizowanych algorytmów. W średnim i najgorszym przypadku, wartości te były o ok. 60\% lepsze od wyników Tabu Search i algorytmów przeszukiwania lokalnego, a w najlepszym znajdowane rozwiązanie było często bardzo bliskie lub równe rozwiązaniu optymalnemu. Zdecydowanie potwierdza to skuteczność takiego podejścia do problemu optymalizacyjnego jak STSP.
 }
 
 \begin{figure}[H]
@@ -67,8 +66,7 @@ Heurystyka jest~zdecydowanie najszybsza, ponieważ sprawdza tylko jedno rozwiąz
 {\color{part2}
 Algorytm Tabusearch trwa zdecydowanie najdłużej ze wszystkich. Jest to spowodowane dość łagodnym warunkiem stopu, przez co przeszukuje bardzo dużą przestrzeń rozwiązań -- stosunkowo większą niż pozostałe algorytmy optymalizacyjne, co widać na Rys. \ref{fig:nsol}.
 
-Symulowane wyżarzanie dzięki temu, że~nie~przegląda całego sąsiedztwa, przy~wysokich temperaturach właściwie bardzo szybko przechodzi do~kolejnych rozwiązań, ostatecznie działa bardzo szybko -- dla~większych instancji nawet szybciej od~algorytmów Greedy i~Steepest.
-%TODO: PG
+Metoda symulowanego wyżarzania okazuje się zbiegać do rozwiązania finalnego w relatywnie krótkim czasie, często bliskim algorytmom przeszukiwania lokalnego. Może być to spowodowane faktem, że w początkowych iteracjach znalezienie lepszego rozwiązania lub spełnienie warunku probabilistycznego jest często spotykane, co pozytywnie wpływa na zbieżność do finalnego rozwiązania. Aczkolwiek należy zauważyć, że czas przetwarzania jest ściśle zależny od przyjętych parametrów, gdzie w przypadku przyjęcia niskiej wartości temperatury końcowej, mniejszego kroku chłodzenia, lub większej liczby iteracji bez zmiany temperatury czas przetwarzania mógłby wzrosnąć, generując jednocześnie potencjalnie lepsze rozwiązania.
 }
 
 \begin{figure}[H]
@@ -94,8 +92,8 @@ Na~wykresie kosztu widać również, że~Greedy jest~kosztowniejszy od~Steepesta
 {\color{part2}
 Implementacja przeszukiwania tabu okazała się najwolniejszym algorytmem ze~wszystkich badanych, w~dodatku zwracającym często minimalnie gorsze wyniki od~pozostałych, w~związku z~czym na~wykresie kosztów, wyraźnie góruje nad~innymi algorytmami.
 
-Koszty symulowanego wyżarzania są~przeważnie mniejsze od~innych algorytmów dzięki dobrym wynikom i~krótkiemu czasowi działania.
-%TODO: PG
+Koszt i efektywność algorytmu symulowanego wyżarzania dla wszystkich analizowanych instancji jest zbliżony do algorytmów przeszukiwań lokalnych. Jest to związane z relatywnie krótkim czasem przetwarzania i dobrymi wynikami.
+
 }
 
 \begin{figure}[H]
@@ -121,8 +119,7 @@ Wykres~\ref{fig:steps} przedstawia liczbę kroków wykonanych przez algorytmy lo
 {\color{part2}
 Algorytm Tabu Search wykonuje więcej kroków niż algorytmy lokalnego przeszukiwania. Nie zatrzymuje się on na optimach lokalnych, ale stara się z nich wychodzić, w poszukiwaniu lepszych rozwiązań tak długo, aż nie znajduje ulepszeń po określonej liczbie kroków.
 
-Algorytm symulowanego wyżarzania wykonuje wielokrotnie więcej kroków od pozostałych, jednak wykonuje je dużo szybciej -- właściwie na każdym wykonanym kroku, przegląda maksymalnie kilka rozwiązań, szczególnie przy wysokiej temperaturze.
-%TODO: PG
+Algorytm symulowanego wyżarzanie wykonuje wielokrotnie więcej kroków od pozostałych algorytmów, co jest spowodowane długim czasem wyżarzania i dojścia do rozwiązania finalnego. Należy pamiętać, że manipulowanie odpowiednimi parametrami mogłoby skrócić lub wydłużyć liczbę kroków.
 }
 
 \begin{figure}[H]
@@ -140,8 +137,7 @@ Na~wykresie \ref{fig:nsol} jest~przedstawiona liczba rozwiązań przeszukiwanych
 {\color{part2}
 Przeszukiwanie tabu nie tylko wykonuje najwięcej kroków, ale też przegląda najwięcej rozwiązań.
 
-Algorytm symulowanego wyżarzania mimo wykonywania wielu kroków, sprawdza często nawet mniej rozwiązań niż pozostałe algorytmy.
-%TODO: PG
+Algorytm symulowanego wyżarzania pomimo wykonywania wielu kroków przegląda mniejszą liczbę rozwiązań, co jest związane ściśle z zastosowaną funkcją generowania losowych rozwiązań.
 }
 
 \begin{figure}[H]

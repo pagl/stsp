@@ -20,6 +20,7 @@ Algorytm symulowanego wyżarzania jest heurystyczną metodą przeszukującą prz
 
 Powyżej przedstawiony generyczny algorytm może zostać wykorzystany w wielu scenariuszach optymalizacyjnych. Dla zadania postawionego w tym zadaniu należało odpowiednio dostroić powyższy algorytm, tak aby najskuteczniej radził sobie w znajdowaniu rozwiązania dla problemu STSP.
 
+
 \subsection{Dobór temperatury początkowej}
 Jednym z ważniejszych kroków w procesie symulowanego wyżarzania jest dobór odpowiedniej temperatury początkowej. Wartość ta decyduje w dużej mierze o czasie zbieżności do rozwiązania finalnego oraz liczbie zaakceptowanych gorszych lokalnie rozwiązań, które mogą prowadzić do nieoczekiwanej poprawy jakości rozwiązania w ujęciu globalnym. W naszej implementacji zdecydowaliśmy się dobierać ten parametr w sposób adaptatywny, ściśle zależny od instancji problemu oraz wygenerowanego pierwszego rozwiązania. Wartość ta wyliczana jest zgodnie z poniższym wzorem.
 
@@ -28,6 +29,10 @@ Jednym z ważniejszych kroków w procesie symulowanego wyżarzania jest dobór o
 \end{equation}
 
 W powyższym wzorze, wektor $x$ jest oryginalnym wygenerowanym rozwiązaniem, funkcja $G(x)$ generuje nowe rozwiązanie $x'$ w sąsiedztwie rozwiązania $x$, a funkcja $f(x)$ zwraca wartość kosztu danego rozwiązania. Parametr $K$ określa liczbę rozwiązań które chcemy wygenerować, a $\theta$ procent akceptowanych ruchów. Tak przedstawiona metoda pozwala na lepszy dobór temperatury początkowej w odniesieniu do konkretnej instancji problemu. W postaci przedstawionej powyżej jest ona jednak wrażliwa na jakość wygenerowanego rozwiązania początkowego i może nie zawsze być prawidłowo dobrana. Wartość ta może być również obliczana rekurencyjnie biorąc pod uwagę szersze spektrum rozwiązań co pozwala na dokładniejszy dobór parametru \cite{saTemperature}. 
+
+
+\subsection{Generowanie nowego rozwiązania}
+W każdej iteracji algorytmu symulowanego wyżarzania należy wybrać jedno losowe rozwiązanie z przestrzeni lokalnych rozwiązań w sąsiedztwie OPT-2. W tym celu zdecydowaliśmy się wylosować dwie różne liczby całkowite w przedziale $(0, n)$, gdzie $n$ jest rozmiarem wektora rozwiązania, a następnie dokonać odwrócenia łuku między odpowiadającymi wierzchołkami w wektorze rozwiązania. Dzięki takiemu podejściu, nie jest potrzebne marnotrawienie zasobów operacyjnych i pamięciowych na generowanie i przechowywanie wszystkich rozwiązań dla danej iteracji algorytmu, z których następnie wybrane zostałoby tylko pojedyncze rozwiązanie, a reszta byłaby zbędna.
 
 
 \subsection{Warunek akceptacji rozwiązania}
